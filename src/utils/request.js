@@ -1,4 +1,6 @@
 import axios from "axios";
+import { ElLoading } from "element-plus";
+let loadingAni=null;
 //创建axios实列对象
 const instance =axios.create({
     //设置服务器地址
@@ -9,6 +11,11 @@ const instance =axios.create({
 
 //设置请求拦截器,将header属性携带拼接到此处
 instance.interceptors.request.use( config =>{
+    loadingAni=ElLoading.service({
+        lock:true,
+        text:'Loading',
+        background:'rgba(0,0,0,0.7)',
+    })
     if (!config) config = {};
     
     // 👇 保证 headers 一定存在
@@ -27,6 +34,7 @@ instance.interceptors.request.use( config =>{
 
 //设置请求响应器
 instance.interceptors.response.use( response=>{
+    loadingAni.close();
     return response.data;
     
 },err =>{

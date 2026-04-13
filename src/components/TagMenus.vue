@@ -59,19 +59,25 @@ const RemoveTable =(path)=>{
         window.sessionStorage.setItem('tabsList',JSON.stringify(tabsList.value))
 }
 
-const AddTabsList=(obj) => {
-    let result=tabsList.value.findIndex(item=>item.path==obj.path)
-    if(result==-1){
-        tabsList.value.push(obj)
-    }
-    window.sessionStorage.setItem('tabsList',JSON.stringify(tabsList.value))
+const AddTabsList = (obj) => {
+  // 🔥 关键：判断 path 是否已经存在，存在就不添加！
+  const isExist = tabsList.value.some(item => item.path === obj.path)
+  
+  // 不存在才添加
+  if (!isExist) {
+    tabsList.value.push(obj)
+  }
+  
+  // 保存到本地存储
+  window.sessionStorage.setItem('tabsList', JSON.stringify(tabsList.value))
 }
-const initTabsList=()=>{
-let result=JSON.parse(window.sessionStorage.getItem('tabsList'))
-if(result){
-    tabsList.value.splice(0, tabsList.length)
-    result.forEach(item => tabsList.value.push(item))
-}
+const initTabsList = () => {
+  let result = JSON.parse(window.sessionStorage.getItem('tabsList'))
+  if (result) {
+    // 🔥 去重：保证从本地存储拿出来也没有重复
+    const uniqueTabs = [...new Map(result.map(item => [item.path, item])).values()]
+    tabsList.value = uniqueTabs
+  }
 }
 initTabsList();
 

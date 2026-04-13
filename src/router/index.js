@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-// import store from '../store';
 
 const routes = [
   {
@@ -12,6 +11,10 @@ const routes = [
     name: 'AdminIndex',
     component: () => import('../views/AdminIndex.vue'),
     children :[
+      {
+        path: '/',
+        redirect: '/login'
+      },
       {
         path:"/",
         redirect:{
@@ -43,6 +46,12 @@ const routes = [
         name:'SkusList',
         component :()=>import("@/views/SkusList.vue")
       },
+      {
+        path:"user/list",
+        meta :{title:'用户管理'},
+        name:'UserList',
+        component :()=>import("@/views/UserList.vue")
+      }
     ]
   },
   {
@@ -57,12 +66,10 @@ const router = createRouter({
   history: createWebHashHistory()
 })
 
-// ========================
-// 🔥 修复：用 return 替代 next()（警告消失！）
-// ========================
 router.beforeEach(async (to, from,next) => {
   const tokenStr = window.sessionStorage.getItem('token');
 
+  
   // 1. 没token 且 不是登录页 → 拦截跳登录
   if (!tokenStr && to.path !== '/login') {
     alert('请先登录')
@@ -74,18 +81,8 @@ router.beforeEach(async (to, from,next) => {
     return next('/admin') // 替代 next('/admin')
   }
 
-  // 3. 有token → 获取用户信息
-  // if (tokenStr) {
-  //   try {
-  //     await store.dispatch("ActionGetUserInfo")
-  //   } catch (err) {
-  //     // 获取失败 = token失效，清除并跳登录
-  //     window.sessionStorage.clear()
-  //     return '/' // 替代 next('/')
-  //   }
-  // }
 next()
-  // 4. 其他情况 → 直接放行（不需要写任何 return，替代 next()）
+
 })
 
 export default router
