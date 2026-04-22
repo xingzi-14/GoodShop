@@ -34,12 +34,18 @@ instance.interceptors.request.use( config =>{
 
 //设置请求响应器
 instance.interceptors.response.use( response=>{
-    loadingAni.close();
+
+if (loadingAni) loadingAni.close();
     return response.data;
     
-},err =>{
-    return err.response.data;
+}, err => {
+    if (loadingAni) loadingAni.close(); // ✅ 报错也必须关闭！
+    if (err && err.response && err.response.data) {
+        return err.response.data;
+    }
+    return { msg: "网络异常或服务器错误" };
 })
+
 
 //导出
 export default instance;

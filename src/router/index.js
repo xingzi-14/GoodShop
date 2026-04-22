@@ -57,7 +57,13 @@ const routes = [
         meta :{title:'图库管理'},
         name:'PicList',
         component :()=>import("@/views/PicList.vue")
-      },      
+      },    
+      {
+        path:"manager/list",
+        meta :{title:'管理员管理'},
+        name:'ManagerCom',
+        component :()=>import("@/views/ManagerCom.vue")
+      }  
     ]
   },
   {
