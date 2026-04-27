@@ -1,6 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-const routes = [
+const routes = [ {
+        path: '/',
+        redirect: '/login'
+      },
   {
     path: '/login',
     name: 'LoginCom',
@@ -11,10 +14,6 @@ const routes = [
     name: 'AdminIndex',
     component: () => import('../views/AdminIndex.vue'),
     children :[
-      {
-        path: '/',
-        redirect: '/login'
-      },
       {
         path:"/",
         redirect:{
@@ -90,10 +89,10 @@ router.beforeEach(async (to, from,next) => {
 
   // 2. 有token 且 去登录页 → 跳后台
   if (tokenStr && to.path === '/login') {
-    return next('/admin') // 替代 next('/admin')
+    return next('/admin/index') // 替代 next('/admin')
   }
 
-next()
+  next()
 
 })
 
