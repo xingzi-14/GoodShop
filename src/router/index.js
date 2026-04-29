@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-const routes = [ {
+const routes = [ 
+      {
         path: '/',
         redirect: '/login'
       },
@@ -62,7 +63,13 @@ const routes = [ {
         meta :{title:'管理员管理'},
         name:'ManagerCom',
         component :()=>import("@/views/ManagerCom.vue")
-      }  
+      },
+      {
+        path:"access/list",
+        meta :{title:'权限管理'},
+        name:'RulesCom',
+        component :()=>import("@/views/RulesCom.vue")
+      }    
     ]
   },
   {
@@ -77,23 +84,18 @@ const router = createRouter({
   history: createWebHashHistory()
 })
 
-router.beforeEach(async (to, from,next) => {
+router.beforeEach(async (to, from) => {
   const tokenStr = window.sessionStorage.getItem('token');
 
   
-  // 1. 没token 且 不是登录页 → 拦截跳登录
   if (!tokenStr && to.path !== '/login') {
-    alert('请先登录')
-    return next('/login') // 替代 next('/')
+    return '/login'
   }
 
-  // 2. 有token 且 去登录页 → 跳后台
+  // 有 token 但去登录页 → 跳首页
   if (tokenStr && to.path === '/login') {
-    return next('/admin/index') // 替代 next('/admin')
+    return '/admin'
   }
-
-  next()
-
 })
 
 export default router
