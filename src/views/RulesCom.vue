@@ -13,7 +13,7 @@
                     <!-- 左边权限名称 -->
                      <div class="left">
                         <el-tag v-if="data.menu==1">菜单</el-tag>
-                        <el-tag type="success" v-if="data.menu==0"></el-tag>
+                        <el-tag type="success" v-if="data.menu==0">权限</el-tag>
                         <el-icon v-if="data.icon"><component :is="data.icon"></component></el-icon>
                         {{ data.name }}
                      </div>
