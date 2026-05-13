@@ -76,6 +76,18 @@ const routes = [
         name:'RoleCom',
         component :()=>import("@/views/RoleCom.vue")
       },    
+      {
+        path:"coupon/list",
+        meta :{title:'优惠券管理'},
+        name:'CouponCom',
+        component :()=>import("@/views/CouponCom.vue")
+      },  
+      {
+        path:"order/list",
+        meta :{title:'订单管理'},
+        name:'OrderCom',
+        component :()=>import("@/views/OrderCom.vue")
+      },   
     ]
   },
   {

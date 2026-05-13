@@ -83,8 +83,7 @@ console.log(error);
 
 const sendRuleOfRole=async()=>{
   console.log(treeRef.value.getCheckedKeys());
- let ids=treeRef.value.getCheckedKeys().join(',');
-   let  result =await setRoleFn(role_id.value,ids)
+   let  result =await setRoleFn(role_id.value,treeRef.value.getCheckedKeys())
    if(result.msg!='ok'||!result.data)return ElMessage.error(result.msg)
    
    console.log(result);

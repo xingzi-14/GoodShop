@@ -1,5 +1,5 @@
 <template>
-    <div class="updaterole">
+    <div class="update">
       <el-dialog v-model="isDialog" :title="propTitle" width="40%" @close="CloseDialog">
         <el-form :model="formDataModel" label-width="80px" ref="formDom" :rules="formSkus">
           <!-- 规格名称 -->

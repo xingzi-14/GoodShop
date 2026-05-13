@@ -15,7 +15,7 @@
                 <template #default="scoped">
                         <el-switch v-model="scoped.row.status" inline-prompt active-text="使用"
                         inactive-text="禁用" :active-value="1" :inactive-value="0"
-                        style="--el-switch-on-color:#13ce66;--el-switch-off-color:ff4949" @change="editStatus(scoped.row)"/>
+                        style="--el-switch-on-color:#13ce66;--el-switch-off-color:ff4949"/>
                     </template>
             </el-table-column>
             <el-table-column label="操作">
