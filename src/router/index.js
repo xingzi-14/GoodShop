@@ -88,6 +88,12 @@ const routes = [
         name:'OrderCom',
         component :()=>import("@/views/OrderCom.vue")
       },   
+      {
+        path:"comment/list",
+        meta :{title:'评论管理'},
+        name:'CommentCom',
+        component :()=>import("@/views/CommentCom.vue")
+      },   
     ]
   },
   {
