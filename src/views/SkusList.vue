@@ -58,14 +58,14 @@ import { ElMessage ,ElMessageBox} from 'element-plus';
 import { ref } from 'vue';
 import UpdateSkus from '../components/UpdateSkus.vue';
 let page=ref(1)
-let pageSize = ref(8)
+let pageSize = ref(10)
 let total=ref(0)
 let tableData=ref([])
 let title=ref(null)
 let editSkus=ref({})
 const selectedList = ref([])
 const getSkusList=async()=>{
-    let result=await getSkusListFn(page.value)
+    let result=await getSkusListFn(page.value,pageSize.value)
     console.log(result);
     if(result.msg!='ok'||!result.data){
         return ElMessage.error(result.msg);

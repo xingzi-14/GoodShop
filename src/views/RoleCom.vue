@@ -53,7 +53,11 @@
         <!-- 子组件 -->
         
         <UpdateRole v-model:propTitle="title" @update="getRolesList" :editRow="editSRow"/>
-        <RoleSetRule v-model:propID="orderId" @update="getRolesList"/>
+        <RoleSetRule 
+        v-model:propID="orderId.id" 
+        :propRole="orderId" 
+        @refresh="getRolesList" 
+    />
     </div>
 
 </template>

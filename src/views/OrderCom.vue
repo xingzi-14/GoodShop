@@ -151,10 +151,10 @@ const tabMap = {
 
 const getOrderList = async () => {
 
-  // const tab = tabMap[activeTab.value]
+  const tab = tabMap[activeTab.value]
   // console.log("传给后端的tab参数：", tab)
 
-  let res = await getOrderListFn(page.value, activeTab.value, searchOrderNo.value)
+  let res = await getOrderListFn(page.value, tab, searchOrderNo.value)
   console.log(res);
   tableData.value = res.data.list
   total.value = res.data.totalCount
@@ -174,14 +174,24 @@ const handleSelectionChange = (val) => {
 
 // 批量删除
 const handleBatchDelete = async () => {
-  if (selectedOrders.value.length === 0) return ElMessage.warning('请选择订单')
-  await ElMessageBox.confirm('确定删除？')
-  let ids = selectedOrders.value.map(item => item.id)
-  let res = await deleteBatchOrderFn(ids)
-  if (res.msg === 'ok') {
-    ElMessage.success('删除成功')
-    getOrderList()
+  if (selectedOrders.value.length === 0) {
+    ElMessage.warning('请选择订单')
+    return
   }
+
+
+    await ElMessageBox.confirm('确定删除？')
+    
+    let params = {
+      ids: selectedOrders.value.map(item => item.id)
+    }
+
+    console.log('最终传给后端：', params)
+
+    let res = await deleteBatchOrderFn(params)
+    if(res.msg!='ok'||!res.data)return ElMessage.error(res.msg)
+    ElMessage.success("删除成功")
+
 }
 
 // 导出Excel

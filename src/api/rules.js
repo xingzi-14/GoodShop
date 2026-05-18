@@ -36,3 +36,10 @@ export const DeleteRules = (id) => {
     method: 'POST'
   })
 }
+export const setRoleFn=(data)=>{
+  return request({
+      url:`admin/role/set_rules`,
+      method:'POST',
+      data
+  })
+}

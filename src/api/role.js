@@ -41,13 +41,5 @@ export const getRolesListFn=(page)=>{
   }
 
 
-  export const setRoleFn=(id,rules_ids)=>{
-    return request({
-        url:`admin/role/set_rules`,
-        method:'POST',
-        data:{
-           id,rules_ids
-        }
-    })
-  }
+
   

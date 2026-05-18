@@ -1,12 +1,17 @@
+// d:/Vue3/day0316/src/api/skus.js
 
 import request from '@/utils/request'
-export const getSkusListFn=(page)=>{
+
+
+export const getSkusListFn = ( page) => {
   return request({
-    url:`admin/skus/${page}`,
-    method:'GET'
- })
+  
+    url: `admin/skus/${page}`,
+    method: 'GET',
+  })
 }
 
+// ... 其他代码保持不变
 export const addSkusFn=(data)=>{
   return request({
     url:'admin/skus',

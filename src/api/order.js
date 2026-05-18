@@ -10,11 +10,11 @@ export const getOrderListFn = (page, tab, no, starttime, endtime) => {
 }
 
 // 2. 批量删除订单
-export const deleteBatchOrderFn = (ids) => {
+export const deleteBatchOrderFn = (data) => {
   return request({
     url: '/admin/order/delete_all',
     method: 'POST',
-    data: { ids }
+    data
   })
 }
 
