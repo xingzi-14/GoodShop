@@ -1,11 +1,11 @@
 import request from '@/utils/request'
 
 // 1. 获取订单列表（分页 + 状态 + 搜索 + 时间）
-export const getOrderListFn = (page, tab, no, starttime, endtime) => {
+export const getOrderListFn = (page,params) => {
   return request({
     url: `/admin/order/${page}`,
     method: 'GET',
-    params: { tab, no, starttime, endtime }
+    params
   })
 }
 

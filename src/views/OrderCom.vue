@@ -2,11 +2,11 @@
   <div class="order-page">
     <el-card>
       <!-- 1. 订单状态标签页 -->
-      <el-tabs v-model="activeTab" @tab-change="handleTabChange">
+      <el-tabs v-model="tabMap.tab" @tab-change="getOrderList">
         <el-tab-pane label="全部" name="all" />
-        <el-tab-pane label="待支付" name="waitPay" />
-        <el-tab-pane label="待发货" name="waitSend" />
-        <el-tab-pane label="待收货" name="waitReceive" />
+        <el-tab-pane label="待支付" name="wait_pay" />
+        <el-tab-pane label="待发货" name="wait_ship " />
+        <el-tab-pane label="待收货" name="wait_confirm " />
         <el-tab-pane label="已收货" name="received" />
         <el-tab-pane label="已完成" name="finished" />
         <el-tab-pane label="已关闭" name="closed" />
@@ -16,7 +16,7 @@
       <!-- 2. 搜索栏 -->
       <div class="search-bar">
         <el-input
-          v-model="searchOrderNo"
+          v-model="tabMap.no"
           placeholder="请输入订单号"
           style="width: 250px"
           clearable
@@ -121,13 +121,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { getOrderListFn, deleteBatchOrderFn, exportOrderExcelFn } from '../api/order'
 import OrderDetails from '../components/OrderDetails.vue'
 
-const activeTab = ref('all')
-const searchOrderNo = ref('')
 const tableData = ref([])
 const page = ref(1)
 const pageSize = ref(10)
@@ -138,34 +136,24 @@ let orderDetails = ref(false)
 let orderData = ref({})
 
 
-const tabMap = {
-  all: '',         // 全部
-  waitPay: 'unpaid',    // 待支付 → 后端: tab=unpaid
-  waitSend: 'pending',// 待发货
-  waitReceive: 'wait_receive', // 待收货
-  received: 'received', // 已收货 → 后端: tab=received
-  finished: 'finished', // 已完成 → 后端: tab=finished
-  closed: 'closed',     // 已关闭
-  refunding: 'refund'   // 退款中
-}
+const tabMap = reactive({
+  tab: 'all',
+  no:'',
+})
+       
+
 
 const getOrderList = async () => {
 
-  const tab = tabMap[activeTab.value]
   // console.log("传给后端的tab参数：", tab)
-
-  let res = await getOrderListFn(page.value, tab, searchOrderNo.value)
+console.log(tabMap);
+  let res = await getOrderListFn(page.value, tabMap)
   console.log(res);
   tableData.value = res.data.list
   total.value = res.data.totalCount
 }
 
-// 切换标签
-const handleTabChange = () => {
-  page.value = 1
-  searchOrderNo.value = ''
-  getOrderList()
-}
+
 
 // 多选
 const handleSelectionChange = (val) => {

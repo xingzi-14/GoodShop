@@ -11,7 +11,7 @@
                             <span @click="openDiaChangePicName(item)">{{item.name }}</span>
                             <span @click="delPicFn(item)">删除 </span>
                         </div>
-                        <div class="pic_edit" v-else-if="$route.path=='/admin/manager/list'||'/admin/user/list'">
+                        <div class="pic_edit" v-else>
                             <el-checkbox v-model="item.checked" @change="selectImgFn(item)"/>
                         </div>
                     </el-card>
@@ -140,21 +140,29 @@
         // ✅修复判断
         if (result.msg !== 'ok' || !result.data) return
     
-        // ✅ 修复 switch 判断（不再覆盖）
-        switch (route.path) {
-            case '/admin/manager/list':
-                data.piclist = result.data.list.map(item => {
-                    item.checked = false
-                    return item
-                })
-                break;
-            case '/admin/image/list':
-                data.piclist = result.data.list
-                break;
-            default:
-                data.piclist = result.data.list
-        }
+        // // ✅ 修复 switch 判断（不再覆盖）
+        // switch (route.path) {
+        //     case '/admin/manager/list':
+        //         data.piclist = result.data.list.map(item => {
+        //             item.checked = false
+        //             return item
+        //         })
+        //         break;
+        //     case '/admin/image/list':
+        //         data.piclist = result.data.list
+        //         break;
+        //     default:
+        //         data.piclist = result.data.list
+        // }
     
+         if(route.path=='/admin/image/list'){
+            data.piclist = result.data.list
+         }else{
+            data.piclist = result.data.list.map(item=>{
+                item.checked = false
+                return item
+            })
+        }
         data.total = result.data.totalCount;
     }
 
