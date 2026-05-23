@@ -72,6 +72,12 @@
     
     const route = useRoute();
     const emits = defineEmits(['selectImgData'])
+    const props = defineProps({
+        maxSelect: {
+            type: Number,
+            default: 1
+        }
+    })
     
     // 分页
     const handleCurrentChange = (p) => {
@@ -172,11 +178,11 @@
         return data.piclist.filter(item => item.checked)
     })
     
-    // 选择图片（只能选1张）
+    // 选择图片（上限由 maxSelect prop 控制）
     const selectImgFn = (val) => {
-        if (val.checked && checkedIMG.value.length > 1) {
+        if (val.checked && checkedIMG.value.length > props.maxSelect) {
             val.checked = false;
-            return ElMessage.error('每次只能选择一张图片')
+            return ElMessage.warning(`最多只能选择 ${props.maxSelect} 张图片`)
         }
         emits('selectImgData', checkedIMG.value)
     }

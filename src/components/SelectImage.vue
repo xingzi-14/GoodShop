@@ -1,22 +1,25 @@
 <template>
 <div class="selectimage">
 
-<el-icon 
-  class="addbut" 
-  size="40" 
-  @click="isDialog=true" 
+<!-- 🟡 优化：达到上限时隐藏 + 号 -->
+<el-icon
+  v-if="!modelValue || (Array.isArray(modelValue) ? modelValue.length < propnum : true)"
+  class="addbut"
+  size="40"
+  @click="isDialog=true"
 >
   <Plus/>
 </el-icon>
 <main v-if="modelValue">
-    <el-image 
-        :src="modelValue" 
-        fit="cover" 
-        v-if="typeof modelValue=='string'" 
-        class="plusicon" 
+    <el-image
+        :src="modelValue"
+        fit="cover"
+        v-if="typeof modelValue=='string'"
+        class="plusicon"
         @click="isDialog=true"
     />
-    <article v-else>
+    <!-- 🟡 优化：空数组时不渲染 article 容器 -->
+    <article v-else-if="Array.isArray(modelValue) && modelValue.length > 0">
         <div class="pic_container" v-for="(item,index) in modelValue" :key=index>
             <span @click="removeImage(index)">x</span>
             <el-image class="plusicon" :src="item" fit="cover" />
@@ -31,7 +34,7 @@
             <el-container style="height: 100%;">
                 <el-container>
                     <PicListAisde ref="chidFn" @changeid="changeCateList"/>
-                    <PicListMain ref="picmainRef"@selectImgData="SelectImgFn"/>
+                    <PicListMain ref="picmainRef" :maxSelect="propnum" @selectImgData="SelectImgFn"/>
                 </el-container>                
             </el-container>
         </el-card>
@@ -47,6 +50,7 @@
 </template>
 <script setup>
 import { ref } from 'vue';
+import { ElMessage } from 'element-plus';
 import PicListAisde from './PicListAside.vue'
 import PicListMain from './PicListMain.vue'
 
@@ -66,15 +70,21 @@ const emits=defineEmits(['update:modelValue'])
 const changeCateList=(cate_id)=>{
     picmainRef.value.getCateID(cate_id)
 }
-const SelectImgFn=(val)=>{
-    
-    avatarUrl=val.map(item=>item.url)
-    console.log(avatarUrl);
+const SelectImgFn = (val) => {
+    avatarUrl = val.map(item => item.url)
+    console.log('[SelectImage] 图库选中:', avatarUrl);
 }
 const submit = () => {
-    // 修复：GoodBanner 期望接收数组数据，此处应返回完整的 avatarUrl 数组而非单个元素
-    // 同时移除长度判断，以便在用户取消所有选择时能正确传递空数组
-    emits('update:modelValue', avatarUrl);
+    console.log('[SelectImage] submit avatarUrl:', avatarUrl, 'modelValue:', props.modelValue);
+    // 合并已有图片和新选图片（去重）
+    const existing = Array.isArray(props.modelValue) ? props.modelValue : [];
+    const merged = [...new Set([...existing, ...avatarUrl])];
+    if (merged.length > props.propnum) {
+        ElMessage.warning(`最多只能选择 ${props.propnum} 张图片`);
+    }
+    const result = merged.slice(0, props.propnum);
+    console.log('[SelectImage] emit update:modelValue:', result);
+    emits('update:modelValue', result);
     isDialog.value = false;
 };
 const removeImage = (index) => {

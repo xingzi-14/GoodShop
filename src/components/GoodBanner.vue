@@ -1,6 +1,9 @@
 <template>
-    <el-dialog title="设置轮播图" destroy-on-close v-model="isDialog" width="40%" 
+    <el-dialog title="设置轮播图" destroy-on-close v-model="isDialog" width="40%"
     @close="CloseDialog">
+        <el-alert v-if="loading" type="info" :closable="false">
+            <template #title>正在加载轮播图数据...</template>
+        </el-alert>
         <el-form :model="FormModel">
             <el-form-item label="轮播图">
                 <SelectImage :propnum="5" v-model="FormModel.bannerList"/>
@@ -13,41 +16,51 @@
     </el-dialog>
 </template>
 <script setup>
-import { ref,watch } from 'vue';
+import { ref, watch, reactive } from 'vue';
 import SelectImage from './SelectImage.vue';
 import { getCategoryGoodsFn, setGoodsBannersFn } from '../api/goods';
 import { ElMessage } from 'element-plus';
-let isDialog=ref(false);
-const FormModel={
-  bannerList:[],
-}
-const props=defineProps({
+let isDialog = ref(false);
+const FormModel = reactive({
+  bannerList: [],
+})
+const props = defineProps({
     propID: [Number, String],
 })
-const emits=defineEmits(['update:propID', 'success'])
-watch(()=>props.propID,(newval)=>{
-    newval!=0?OpenDialog():CloseDialog()
+const emits = defineEmits(['update:propID', 'success'])
+watch(() => props.propID, (newval) => {
+    newval != 0 ? OpenDialog() : CloseDialog()
 })
 
-const OpenDialog=async()=>{
-    isDialog.value=true; 
-  let res=await getCategoryGoodsFn(props.propID)
-  console.log(res);
-  if(res.msg!='ok'||!res.data)return ElMessage.error(res.msg)
-  FormModel.bannerList=res.data.goodsBanner.map(item=>item.url)
-  
+// 调试：监听子组件 v-model 是否传回数据
+watch(() => FormModel.bannerList, (newVal) => {
+    console.log(newVal);
+    
+}, { deep: true })
+
+const OpenDialog = async () => {
+    isDialog.value = true;
+      
+        let res = await getCategoryGoodsFn(props.propID);
+        console.log('[GoodBanner] getCategoryGoodsFn 返回:', res);
+        if (res.msg !== 'ok' || !res.data) return ElMessage.error(res.msg);
+        const banners = res.data.goodsBanner || [];
+        console.log('[GoodBanner] goodsBanner 原始数据:', JSON.stringify(banners));
+        FormModel.bannerList = banners.map(item => typeof item === 'string' ? item : item.url);  
+    
 }
-const CloseDialog=()=>{
-    FormModel.bannerList=[]
+const CloseDialog = () => {
+    FormModel.bannerList = []
     emits("update:propID", 0)
-    isDialog.value=false;
+    isDialog.value = false;
 }
 
 const submit = async () => {
-    let res = await setGoodsBannersFn(props.propID, { bannerList: FormModel.bannerList });
+   
+
+    let res = await setGoodsBannersFn(props.propID, FormModel);
     if (res.msg !== 'ok') return ElMessage.error(res.msg || '设置失败');
     ElMessage.success('轮播图设置成功');
-    // 接口调用成功后触发 success 事件，通知最外层组件刷新
     emits('success');
     CloseDialog();
 }
