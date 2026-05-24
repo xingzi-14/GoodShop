@@ -6,15 +6,28 @@
                 <el-col :span="8">
                     <el-input v-model="title" placeholder="请输入商品名称" clearable   @clear="getCommentList">
                         <template #append>
-                            
+
                             <el-button  @click="getCommentList"><el-icon><Search /></el-icon></el-button>
 
                         </template>
                     </el-input>
                 </el-col>
             </el-row>
-         
-             <el-table :data="tableData" style="width: 100%;">
+
+             <div class="table-container">
+             <el-table :data="tableData" style="width: 100%;" max-height="760">
+                <el-table-column type="expand">
+                    <template #default="scoped">
+                        <div class="expand-row">
+                            <p>
+                                <strong>评价用户：</strong>{{ scoped.row.user.username }}
+                            </p>
+                            <p><strong>评价内容：</strong>{{ scoped.row.review.data }}</p>
+                            <p><strong>评价时间：</strong>{{ scoped.row.review_time }}</p>
+                        </div>
+                    </template>
+                </el-table-column>
+
                 <el-table-column label="商品">
                     <template #default="scoped">
                         <div class="avatar">
@@ -23,26 +36,26 @@
                         </div>
                     </template>
                 </el-table-column>
-    
+
                 <el-table-column label="评分">
                    <template #default="scoped">
                     <p>
                        用户：{{ scoped.row.user.username}}
                     </p>
-                        
+
                         <el-rate
                             v-model="scoped.row.rating"
                             disabled
                             show-score
                             text-color="#ff9900"
                             score-template="{value}分"
-                        /> 
+                        />
                    </template>
                 </el-table-column>
-    
+
                 <el-table-column label="评价时间" prop="create_time">
                 </el-table-column>
-    
+
                 <el-table-column label="是否显示">
                     <template #default="scoped">
                         <el-switch v-model="scoped.row.status" inline-prompt  :active-value="1" :inactive-value="0"
@@ -50,7 +63,8 @@
                     </template>
                 </el-table-column>
              </el-table>
-             <div class="page"> 
+             </div>
+             <div class="page">
         <el-pagination
           v-model:current-page="page"
           :page-size="pageSize"
@@ -60,7 +74,7 @@
         /></div>
         </el-card>
     </div>
-    
+
     </template>
 <script setup>
 import { ref } from 'vue';
@@ -96,4 +110,18 @@ getCommentList()
 </script>
 <style scoped lang="less">
 
+.avatar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.expand-row {
+    padding: 12px 20px;
+    p {
+        margin: 6px 0;
+        font-size: 13px;
+        color: #555;
+    }
+}
 </style>
