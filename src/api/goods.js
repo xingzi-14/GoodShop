@@ -61,10 +61,19 @@ export const editGoodsSkuFn=(id,data)=>{
       data
     })
 }
-export const insertGoodsSkusFn=(data)=>{ 
+export const insertGoodsSkusFn=(data)=>{
     return request({
       url: `admin/goods_skus_card`,
       method: 'POST',
+      data
+    })
+}
+// 编辑商品规格
+export const editGoodsSkusCardFn=(id,data)=>{
+    return request({
+      url: `admin/goods_skus_card/${id}`,
+      method: 'POST',
+      data
     })
 }
 
@@ -76,11 +85,26 @@ export const editGoodSkusValFn=(id,data)=>{
       data
     })
 }
-// 删除商品规格·
-export const delGoodsFn=(id)=>{ 
+// 删除商品规格
+export const delGoodsSkusCardFn=(id)=>{
     return request({
       url: `admin/goods_skus_card/${id}/delete`,
-      method: 'DELETE',
+      method: 'POST',
+    })
+}
+// 新增商品规格选项值
+export const insertGoodsSkusCardValueFn=(data)=>{
+    return request({
+      url: `admin/goods_skus_card_value`,
+      method: 'POST',
+      data
+    })
+}
+// 删除商品规格选项值
+export const delGoodsSkusCardValueFn=(id)=>{
+    return request({
+      url: `admin/goods_skus_card_value/${id}/delete`,
+      method: 'POST',
     })
 }
 

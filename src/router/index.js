@@ -93,7 +93,19 @@ const routes = [
         meta :{title:'评论管理'},
         name:'CommentCom',
         component :()=>import("@/views/CommentCom.vue")
-      },   
+      },
+      {
+        path:"distribution/index",
+        meta :{title:'分销员管理'},
+        name:'DistributionAgent',
+        component :()=>import("@/views/DistributionAgent.vue")
+      },
+      {
+        path:"distribution/setting",
+        meta :{title:'分销设置'},
+        name:'DistributionSettings',
+        component :()=>import("@/views/DistributionSettings.vue")
+      },
     ]
   },
   {
