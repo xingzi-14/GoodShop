@@ -75,18 +75,35 @@ const SelectImgFn = (val) => {
     console.log('[SelectImage] 图库选中:', avatarUrl);
 }
 const submit = () => {
-    console.log('[SelectImage] submit avatarUrl:', avatarUrl, 'modelValue:', props.modelValue);
-    // 合并已有图片和新选图片（去重）
-    const existing = Array.isArray(props.modelValue) ? props.modelValue : [];
-    const merged = [...new Set([...existing, ...avatarUrl])];
-    if (merged.length > props.propnum) {
-        ElMessage.warning(`最多只能选择 ${props.propnum} 张图片`);
+    let imgArr = [];
+    
+    // 判断当前的操作是多图模式还是单图模式
+    if (props.propnum == 1) {
+        // 单图：返回所有选项数组的第一位元素
+        imgArr = avatarUrl[0];
+    } else if (props.propnum > 1) {
+        // 多图
+        // 数组获取原来已经存在的图片数组，再获取新添加的图片数组
+        imgArr = [...props.modelValue, ...avatarUrl];
+        console.log(imgArr);
+        // 判断是否超过5张图
+        if (imgArr.length > props.propnum) {
+            return ElMessage.error(`最多上传${props.propnum}张图片`);
+        }
     }
-    const result = merged.slice(0, props.propnum);
-    console.log('[SelectImage] emit update:modelValue:', result);
-    emits('update:modelValue', result);
+    
+    // 确认图片数组没有问题后，将结果返回给父组件
+    if (imgArr) {
+        emits('update:modelValue', imgArr);
+    }
+    
     isDialog.value = false;
 };
+/**
+ * 删除指定索引位置的图片
+ * 
+ * @param {number} index - 要删除的图片在数组中的索引位置
+ */
 const removeImage = (index) => {
     // 修复直接修改 prop 导致的 Vue 警告，改为通过 emit 更新 v-model
     if (Array.isArray(props.modelValue)) {

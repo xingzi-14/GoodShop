@@ -33,7 +33,7 @@ export const editGoodsFn = (id, data) => {
 //轮播图
 export const setGoodsBannersFn = (id, data) => {
   return request({
-    url: `admin/goods/${id}`,
+    url: `admin/goods/banners/${id}`,
     method: 'POST',
     data
   })
