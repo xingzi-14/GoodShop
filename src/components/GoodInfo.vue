@@ -14,7 +14,7 @@
     </div>
 </template>
 <script setup>
-import { ref,watch } from 'vue';
+import { ref,watch,reactive } from 'vue';
 import { getCategoryGoodsFn,setGoodsContenTFn } from '../api/goods';
 import { ElMessage } from 'element-plus';
 import wangEditor from './wangEditor.vue';
@@ -22,9 +22,9 @@ let isDiglog = ref(false);
 const props=defineProps({
     propID:Number
 })
-const FormModel={
+const FormModel=reactive({
     content:''
-}
+})
 const emits=defineEmits(['update:propID'])
 watch(()=>props.propID,async(val)=>{
     val!=0?OpenDialog():CloseDialog()

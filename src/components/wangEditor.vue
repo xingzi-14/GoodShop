@@ -1,7 +1,8 @@
 <template>
-    <div class="wang_editor_com"> 
+    <div class="wang_editor_com">
         <!-- 工具栏 -->
         <Toolbar
+            v-if="editorReady"
             style="border-bottom: 1px solid #ccc"
             :editor="editorRef"
             :defaultConfig="toolbarConfig"
@@ -9,7 +10,7 @@
         />
         <!-- 编辑器 -->
         <Editor
-            style="height: 300px; overflow-y: hidden;"
+            style="height: 400px; overflow-y: hidden;"
             v-model="valueHtml"
             :defaultConfig="editorConfig"
             mode="default"
@@ -20,19 +21,81 @@
 
 <script setup>
 import '@wangeditor/editor/dist/css/style.css'
-// 引入响应式函数以及钩子函数
 import { onBeforeUnmount, watch, ref, shallowRef } from 'vue';
-// 导入插件的组件
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
+import { image } from '@/api/pics';
+import { ElMessage } from 'element-plus';
 
 // 编辑器实例化，使用shallowRef
 const editorRef = shallowRef();
+const editorReady = ref(false);
 
-// 工具栏组件的默认配置
-const toolbarConfig = {};
+// 工具栏配置
+const toolbarConfig = {
+    excludeKeys: [],
+    toolbarKeys: [
+        'headerSelect',
+        '|',
+        'bold',
+        'italic',
+        'underline',
+        'through',
+        '|',
+        'color',
+        'bgColor',
+        '|',
+        'fontSize',
+        'fontFamily',
+        'lineHeight',
+        '|',
+        'bulletedList',
+        'numberedList',
+        'todo',
+        '|',
+        'justifyLeft',
+        'justifyCenter',
+        'justifyRight',
+        'justifyJustify',
+        '|',
+        'indent',
+        'delIndent',
+        '|',
+        'insertLink',
+        'insertImage',
+        'insertVideo',
+        'insertTable',
+        '|',
+        'undo',
+        'redo',
+        '|',
+        'clearStyle',
+        'fullScreen'
+    ]
+};
 
-// 编辑器的默认配置
-const editorConfig = { placeholder: '请输入内容...' };
+// 编辑器配置
+const editorConfig = {
+    placeholder: '请输入商品详情内容...',
+    MENU_CONF: {
+        uploadImage: {
+            async customUpload(file, insertFn) {
+                const formData = new FormData();
+                formData.append('file', file);
+                try {
+                    const res = await image(formData);
+                    if (res.url) {
+                        insertFn(res.url);
+                    } else {
+                        ElMessage.error('图片上传失败');
+                    }
+                } catch (e) {
+                    ElMessage.error('图片上传失败');
+                    console.error(e);
+                }
+            }
+        }
+    }
+};
 
 // 接收父组件传递过来的数据
 const props = defineProps({
@@ -58,6 +121,7 @@ watch(valueHtml, (newVal) => {
 // 编辑器创建完成时的回调
 const handleCreated = (editor) => {
     editorRef.value = editor;
+    editorReady.value = true;
 };
 
 // 组件销毁时，及时销毁编辑器实例
