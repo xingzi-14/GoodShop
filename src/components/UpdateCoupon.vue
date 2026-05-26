@@ -10,8 +10,8 @@
           <!-- 类型：满减/折扣 -->
           <el-form-item label="类型">
             <el-radio-group v-model="form.type" reqiured>
-              <el-radio :label="0">满减</el-radio>
-              <el-radio :label="1">折扣</el-radio>
+              <el-radio :value="0">满减</el-radio>
+              <el-radio :value="1">折扣</el-radio>
             </el-radio-group>
           </el-form-item>
   

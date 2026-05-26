@@ -63,7 +63,7 @@
                         <el-button type="primary" size="small" @click="sendRowData(scoped.row)"><el-icon><Edit /></el-icon></el-button>
                         <el-button type="info"size="small" @click="goodID=scoped.row.id">设置轮播图</el-button>
                         <el-button type="info"size="small" @click="infoID=scoped.row.id">设置商品详情</el-button>
-                        <el-button type="info"size="small">设置商品规格</el-button>
+                        <el-button type="info"size="small" @click="skuID=scoped.row.id">设置商品规格</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -88,6 +88,7 @@
         <UpdateGood v-model:prop-title="dia_title" :propCategory="categoryData" @success="getGoodsList" :editData="RowData"/>
         <GoodBanner ref="goodBannerRef" v-model:propID="goodID" @success="getGoodsList"/>
         <GoodInfo ref="goodinfoRef" v-model:propID="infoID" @success="getGoodsList"/>
+        <GoodsSku v-model:propID="skuID" />
     </div>
 </template>
 <script setup>
@@ -97,6 +98,7 @@ import { ElMessage } from 'element-plus';
 import UpdateGood from '../components/UpdateGood.vue';
 import GoodBanner from '../components/GoodBanner.vue';
 import GoodInfo from '../components/GoodInfo.vue';
+import GoodsSku from '../components/GoodsSku.vue';
 let tableData = ref([]);
 let page=ref(1);
 let total=ref(0);
@@ -113,6 +115,7 @@ let goodID=ref(0)
 let infoID=ref(0)   //商品详情id
 let goodBannerRef=ref(null)
 let goodinfoRef=ref(null)
+let skuID=ref(null)
 
 const getGoodsList=async()=>{
     let res=await getGoodsListFn(page.value,queryData);

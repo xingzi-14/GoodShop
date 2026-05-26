@@ -100,6 +100,16 @@ export const insertGoodsSkusCardValueFn=(data)=>{
       data
     })
 }
+
+// 编辑商品规格选项值
+export const editGoodsSkusCardValueFn=(id, data)=>{
+    return request({
+      url: `admin/goods_skus_card_value/${id}`,
+      method: 'POST',
+      data
+    })
+}
+
 // 删除商品规格选项值
 export const delGoodsSkusCardValueFn=(id)=>{
     return request({

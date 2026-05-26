@@ -177,13 +177,30 @@ async function handleSave() {
   submitting.value = true
   try {
     const posterUrls = []
+    
+    // 处理海报图片上传
     for (const item of posterFileList.value) {
       if (item.raw) {
+        // 新上传的图片
         const formData = new FormData()
-        formData.append('file', item.raw)
-        const uploadRes = await image(formData)
-        posterUrls.push(uploadRes.url)
+        // 注意：后端期望的字段名是 'img' 而不是 'file'
+        formData.append('img', item.raw)
+        try {
+          const uploadRes = await image(formData)
+          if (uploadRes && uploadRes.url) {
+            posterUrls.push(uploadRes.url)
+          } else {
+            console.warn('图片上传返回数据异常:', uploadRes)
+            ElMessage.warning('部分图片上传失败')
+          }
+        } catch (uploadError) {
+          console.error('图片上传失败:', uploadError)
+          ElMessage.error('图片上传失败，请重试')
+          submitting.value = false
+          return
+        }
       } else if (item.url) {
+        // 已存在的图片URL
         posterUrls.push(item.url)
       }
     }
@@ -198,15 +215,19 @@ async function handleSave() {
       brokerage_method: form.brokerage_method
     }
 
+    console.log('提交的分销设置数据:', payload)
+    
     const res = await updateDistributionSetting(payload)
     if (res.msg === 'ok') {
       ElMessage.success('保存成功')
+      // 刷新数据
+      await fetchSettings()
     } else {
       ElMessage.error(res.msg || '保存失败')
     }
   } catch (e) {
-    ElMessage.error('保存失败')
-    console.error(e)
+    console.error('保存分销设置失败:', e)
+    ElMessage.error(e.message || '保存失败，请稍后重试')
   } finally {
     submitting.value = false
   }
