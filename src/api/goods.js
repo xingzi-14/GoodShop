@@ -77,7 +77,7 @@ export const editGoodsSkusCardFn=(id,data)=>{
     })
 }
 
-
+//编辑规格tag
 export const editGoodSkusValFn=(id,data)=>{ 
     return request({
       url: `admin/goods_skus_card_value/${id}`,

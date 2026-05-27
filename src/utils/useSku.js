@@ -1,5 +1,7 @@
 import { nextTick, ref } from "vue";
-import { insertGoodsSkusCardValueFn, delGoodsSkusCardValueFn, editGoodsSkusCardValueFn } from "../api/goods";
+import { insertGoodsSkusCardValueFn, delGoodsSkusCardValueFn,
+     editGoodsSkusCardValueFn ,insertGoodsSkusFn,
+     delGoodsSkusCardFn,editGoodsSkusCardFn} from "../api/goods";
 import { ElMessage } from 'element-plus';
 
 export const goodID = ref(0);
@@ -134,40 +136,27 @@ export function initSkuItemVal(id) {
      * @param {Object} tag - 要修改的规格选项值对象
      */
     const editTag = async (val, tag) => {
-        try {
-            if (!tag || !tag.id) {
-                ElMessage.warning('无效的规格值');
-                return;
-            }
             
-            if (!val || val.trim() === '') {
-                ElMessage.warning('规格值不能为空');
-                return;
-            }
             
             let obj = {
-                id: tag.id,
-                value: val.trim(),
-                name: tagList.name,
-                order: tag.order || 0
+                goods_skus_card_id: tag.goods_skus_card_id,
+                name:tag.name,
+                order:tag.order,
+                value:val,
             };
+            let id =tag.id;
             
-            let res = await editGoodsSkusCardValueFn(obj);
+            let res = await editGoodsSkusCardValueFn(id,obj);
             
-            if (res.msg != 'ok') {
-                ElMessage.error(res.msg || '修改失败');
-                return;
+            if (res.msg != 'ok'||!res.data) {
+                tag.text=tag.value;
+                return
             }
             
             // 更新本地列表
-            tag.value = val.trim();
-            tag.text = val.trim();
+            tag.value = val;
+            tag.text = val;
             
-            ElMessage.success('修改成功');
-        } catch (error) {
-            console.error('修改规格值失败:', error);
-            ElMessage.error('修改失败，请稍后重试');
-        }
     };
     
     /**
@@ -192,4 +181,46 @@ export function initSkuItemVal(id) {
         editTag,
         showInput
     };
+}
+export function initSkuFn(){
+    const AddTag=async()=>{
+        let obj={
+            goods_id:goodID.value,
+            name:'规格名称',
+            order:1,
+            type:0,
+        }
+        let res=await insertGoodsSkusFn(obj)
+        if(res.msg!='ok'||!res.data)return
+        skuList.value.push({
+            ...res.data,
+             text:res.data.name,
+             goodsSkusCardValue:[],
+        })
+    }
+    const DelSku=async(id)=>{
+        let res=await delGoodsSkusCardFn(id)
+        if(res.msg!='ok'||!res.data)return ElMessage.error(res.msg)
+        ElMessage.success(res.msg)
+        let index=skuList.value.findIndex(item=>item.id==id)
+        if(index!=-1)skuList.value.splice(index,1)
+    }
+    const Editsku=async(val)=>{ 
+        let obj={
+            goods_id:goodID.value,
+            name:val.text,
+            order:val.order,
+            type:val.type,
+        }
+        let res=await editGoodsSkusCardFn(val.id,obj)
+        if(res.msg!='ok'||!res.data){
+            val.text=val.name
+            return ElMessage.error(res.msg)
+        }
+        val.name=val.text
+        ElMessage.success(res.msg)
+    }
+    return{
+        AddTag,DelSku,Editsku
+    }
 }
