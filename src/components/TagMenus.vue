@@ -128,48 +128,78 @@ const editPath =(res)=>{
 </script>
 
 <style scoped lang="less">
-.tagmenu{
-    display: flex;
-    background-color: pink;
-    overflow: hidden;
-    padding-top: 7px;
-    padding-bottom: 5px;
-    border-radius: 8px;
+.tagmenu {
+  display: flex;
+  align-items: center;
+  background-color: #f0f2f5;
+  overflow: hidden;
+  padding: 8px 8px 4px 8px;
+  border-bottom: 1px solid #e4e7ed;
 }
-.tabsclass{
-    max-width: 1138px;
-    flex: 1;
 
-    //穿刺样式：修改UI框架的底层样式代码
-:deep(.el-tabs__header){
+.tabsclass {
+  max-width: 1138px;
+  flex: 1;
+
+  :deep(.el-tabs__header) {
     margin: 0;
     border-bottom: none !important;
-}
-:deep(.el-tabs__nav){
-    border: 0!important;
-}
+  }
 
-:deep(.el-tabs__item){
-    background-color: white;
-    height: 35px;
-    line-height: 35px;
-    border-radius:10px;
-    margin-left: 10px;
-    border: 0;
-}
-}
+  :deep(.el-tabs__nav) {
+    border: 0 !important;
+  }
 
-
-
-.el-dropdown{
-    width: 30px;
-    height: 35px;
-    background-color: white;
+  :deep(.el-tabs__item) {
+    background-color: #fff;
+    height: 32px;
+    line-height: 32px;
     border-radius: 6px;
-    display: flex;
-    justify-content: center;
-    line-height: 45px;
-    margin-left: auto;
-    margin-right: 10px;
+    margin-right: 6px;
+    margin-left: 0;
+    border: 1px solid #e4e7ed;
+    font-size: 13px;
+    color: #606266;
+    padding: 0 12px;
+    transition: all 0.3s ease;
+  }
+
+  :deep(.el-tabs__item:hover) {
+    color: #409eff;
+    border-color: #d9ecff;
+  }
+
+  :deep(.el-tabs__item.is-active) {
+    color: #409eff;
+    background: linear-gradient(135deg, #ecf5ff, #d9ecff);
+    border-color: #b3d8ff;
+    font-weight: 600;
+  }
+
+  :deep(.el-tabs__nav-next),
+  :deep(.el-tabs__nav-prev) {
+    line-height: 32px;
+  }
+}
+
+.el-dropdown {
+  width: 34px;
+  height: 32px;
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px solid #e4e7ed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    border-color: #b3d8ff;
+    background-color: #ecf5ff;
+  }
 }
 </style>

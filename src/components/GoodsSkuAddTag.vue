@@ -17,15 +17,18 @@ const {
     }=initSkuItemVal(props.skuID);
 </script>
 <style lang="less" scoped>
-.el-tag{
-    margin-right: 6px;
+.el-tag {
+  margin-right: 6px;
+  border-radius: 4px;
 }
-:deep(.el-input){
-    height: 24px !important;
-    font-size: 13px;
+
+:deep(.el-input) {
+  height: 24px !important;
+  font-size: 13px;
 }
-.inputStyle{
-    width: 70px;
+
+.inputStyle {
+  width: 70px;
 }
 </style>
        

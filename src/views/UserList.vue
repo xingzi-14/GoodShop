@@ -303,17 +303,29 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.manager-manage {
+  padding: 12px;
+}
+
 .search-group {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
   margin-bottom: 15px;
   margin-top: 15px;
+}
+
+.search-bar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .table-wrapper {
   height: 650px;
   overflow-y: auto;
   overflow-x: hidden;
+  border-radius: 6px;
 }
 </style>

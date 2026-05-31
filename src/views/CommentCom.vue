@@ -109,19 +109,43 @@ const handleCurrentChange=(p)=>{
 getCommentList()
 </script>
 <style scoped lang="less">
+.commentcom {
+  padding: 12px;
+}
 
 .avatar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: #303133;
 }
+
 .expand-row {
-    padding: 12px 20px;
-    p {
-        margin: 6px 0;
-        font-size: 13px;
-        color: #555;
-    }
+  padding: 16px 24px;
+  background: #fafbfc;
+  border-radius: 6px;
+
+  p {
+    margin: 6px 0;
+    font-size: 13px;
+    color: #606266;
+    line-height: 1.6;
+  }
+
+  strong {
+    color: #303133;
+  }
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  padding-top: 16px;
+}
+
+.table-container {
+  margin-top: 15px;
 }
 </style>

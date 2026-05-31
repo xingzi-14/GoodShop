@@ -83,57 +83,78 @@ defineExpose({
 })
 </script>
 <style scoped lang="less">
-.el-aside{
-    height: 100%;
-    border-right: 1px solid #dbdbdb;
-    position: relative;
+.el-aside {
+  height: 100%;
+  border-right: 1px solid #ebeef5;
+  position: relative;
+  background: #fafbfc;
 
-    .page{
-        position: absolute;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .piclistaside{
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 50px;
-        left: 0;
-        overflow-y: auto;
-        .cate-item{
-            display: flex;
-            height: 45px;
-            align-items: center;
-            cursor: pointer;
-            span{
-                padding-left: 10px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                flex: 1;
-                height: 45px;
-                line-height: 45px;
-            }
-            em{
-                margin-left: auto;
-                padding-right: 5px;
-                .el-button{
-                    margin: 0;
-                    width: 30px;
-                }
-            }
-            &:hover{
-                background-color: #f3f3f3;
-            }
+  .page {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-top: 1px solid #ebeef5;
+  }
+
+  .piclistaside {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 50px;
+    left: 0;
+    overflow-y: auto;
+
+    .cate-item {
+      display: flex;
+      height: 45px;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 6px;
+      margin: 2px 6px;
+      transition: all 0.3s ease;
+
+      span {
+        padding-left: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex: 1;
+        height: 45px;
+        line-height: 45px;
+        font-size: 14px;
+        color: #606266;
+      }
+
+      em {
+        margin-left: auto;
+        padding-right: 8px;
+
+        .el-button {
+          margin: 0;
+          width: 28px;
         }
-        .active{
-            background-color: #f3f3f3;
-        }
+      }
+
+      &:hover {
+        background-color: #ecf5ff;
+      }
     }
+
+    .active {
+      background: linear-gradient(135deg, #ecf5ff, #d9ecff);
+      border-radius: 6px;
+
+      span {
+        color: #409eff;
+        font-weight: 600;
+      }
+    }
+  }
 }
 </style>

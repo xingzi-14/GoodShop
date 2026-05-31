@@ -132,43 +132,73 @@ const setMenus=()=>{
  </el-dialog>
 </template>
 <style scoped lang="less">
-.headercom{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    color: white;
+.headercom {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #fff;
 }
-.logo{
-    font-size: 26px;
-    font-weight: bold;
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
-.foldicon{
-    margin-left: 15px;
+
+.foldicon {
+  margin-left: 20px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.foldicon:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.article {
+  margin-left: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  .iconrigth {
     cursor: pointer;
-}
-.article{
-    margin-left: auto;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    .iconrigth{
-    margin-right: 15px;
-}
-.el-dropdown{
-    color: white;
+    font-size: 18px;
+    padding: 6px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .iconrigth:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .el-dropdown {
+    color: #fff;
     cursor: pointer;
-        span{
-        display: flex;
-        align-items: center;
-            .el-avatar{
-                margin-left: 15px;
-                margin-right: 10px;
-            }
-        }
-        
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
 
-}
+    span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
 
+      .el-avatar {
+        margin-right: 4px;
+      }
+    }
+  }
+}
 </style>

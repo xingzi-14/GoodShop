@@ -94,15 +94,20 @@ const editStatus=async(row)=>{
 
 getCategoryList()
 </script>
-<style scoped less="lang">
-    .el-card{
-        margin-top: 20px;
-        height: 680px;
-        overflow-y: auto;
-        overflow-x: hidden; 
-        .el-table{
-            margin-top: 15px;
-        }
-    }
-    
+<style scoped lang="less">
+.homeIndex {
+  padding: 12px;
+}
+
+.el-card {
+  margin-top: 0;
+  height: 680px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px;
+
+  .el-table {
+    margin-top: 15px;
+  }
+}
 </style>

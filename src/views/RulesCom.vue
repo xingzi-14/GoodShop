@@ -117,47 +117,71 @@ const DelRules=async(id)=>{
 }
 </script>
 <style scoped lang="less">
-.rulescom{
-    // height: 630px;
-    // overflow-y: auto;
-    // overflow-x: hidden;
-    .el-card{
-        margin-top: 20px;
-        height: 630px;
-        overflow-y: auto;
-        overflow-x: hidden; 
-        .el-tree{
-            margin-top: 20px;
-            .content{
-                width: 100%;
-                display: flex;
-                align-items: center;
-                padding-top: 20px;
-                padding-bottom: 20px;
-                .left{
-                    width: 200px;
-                    display: flex;
-                    align-items: center;
-                    .el-icon{
-                        margin-left: 10px;
-                        margin-right: 10px;
-                    }
-                }
-                .right{
-                    margin-left: auto;
-                    width: 200px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    .el-switch{
-                        margin-right: 13px;
-                    }
-                }
-            }
-            :deep(.el-tree-node__content){
-                height: 40px;
-            }
+.rulescom {
+  padding: 12px;
+
+  .el-card {
+    margin-top: 0;
+    height: 630px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 16px;
+
+    .el-tree {
+      margin-top: 20px;
+
+      .content {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 14px 0;
+        border-bottom: 1px solid #f5f7fa;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #fafbfc;
+          border-radius: 6px;
+          padding-left: 8px;
+          padding-right: 8px;
         }
+
+        .left {
+          flex: 0 0 auto;
+          min-width: 200px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 14px;
+          font-weight: 500;
+          color: #303133;
+
+          .el-icon {
+            font-size: 16px;
+          }
+        }
+
+        .right {
+          margin-left: auto;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .el-switch {
+            margin-right: 8px;
+          }
+        }
+      }
+
+      :deep(.el-tree-node__content) {
+        height: 44px;
+        padding: 0 8px;
+        border-radius: 6px;
+      }
+
+      :deep(.el-tree-node__content:hover) {
+        background: #f5f7fa;
+      }
     }
+  }
 }
 </style>

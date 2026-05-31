@@ -158,5 +158,9 @@ function handleClosed() {
   align-items: center;
   gap: 12px;
   margin-bottom: 16px;
+  padding: 12px 16px;
+  background: #fafbfc;
+  border-radius: 8px;
+  border: 1px solid #ebeef5;
 }
 </style>

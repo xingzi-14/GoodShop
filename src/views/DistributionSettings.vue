@@ -236,18 +236,27 @@ async function handleSave() {
 
 <style scoped>
 .distribution-settings {
-  padding: 20px;
+  padding: 12px;
   height: 75vh;
   overflow-y: auto;
 }
+
 .suffix {
   margin-left: 8px;
-  color: #666;
+  color: #909399;
+  font-weight: 500;
 }
+
 .el-form-item {
   margin-bottom: 22px;
 }
+
 .el-divider {
   margin-top: 0;
+}
+
+:deep(.el-divider__text) {
+  font-weight: 600;
+  color: #303133;
 }
 </style>

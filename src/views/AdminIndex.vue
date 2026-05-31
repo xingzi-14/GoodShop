@@ -57,21 +57,33 @@ import store from '../store';
 // }
 </script>
 <style scoped>
-.adminIndex{
+.adminIndex {
   height: 100%;
-  /* background-color: antiquewhite; */
+  background-color: #f0f2f5;
 }
-.container{
-  height: 100%;
 
+.container {
+  height: 100%;
 }
-.el-header{
-  background-color: aqua;
+
+.el-header {
+  background: linear-gradient(135deg, #1a3a6e 0%, #2b5bb5 50%, #1a73e8 100%);
+  padding: 0 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 10;
 }
-/* .el-aside{
-  background-color: bisque;
-} */
- /* .el-main{ */
-  /* background-color: pink; */
- /* } */
+
+.el-aside {
+  transition: width 0.3s ease;
+  background-color: #ffffff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.el-main {
+  background-color: #f0f2f5;
+  padding: 0;
+  overflow: hidden;
+}
 </style>

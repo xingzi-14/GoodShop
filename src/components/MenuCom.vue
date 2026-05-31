@@ -51,8 +51,61 @@ let defaultActive=ref (route.path)
         </el-menu>
     </div>
 </template>
-<style scoped>
+<style scoped lang="less">
+.menuCom {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+:deep(.el-menu) {
+  border-right: none !important;
+  background-color: #ffffff;
+}
+
+:deep(.el-menu-item) {
+  font-size: 14px;
+  font-weight: 500;
+  color: #606266;
+  margin: 4px 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+:deep(.el-menu-item:hover) {
+  background-color: #ecf5ff !important;
+  color: #409eff;
+}
+
+:deep(.el-menu-item.is-active) {
+  background: linear-gradient(135deg, #ecf5ff, #d9ecff) !important;
+  color: #409eff !important;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+:deep(.el-sub-menu) {
+  margin: 2px 0;
+}
+
+:deep(.el-sub-menu__title) {
+  font-size: 14px;
+  font-weight: 500;
+  color: #303133;
+  margin: 0 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+:deep(.el-sub-menu__title:hover) {
+  background-color: #f5f7fa !important;
+}
+
+:deep(.el-sub-menu.is-active > .el-sub-menu__title) {
+  color: #409eff !important;
+}
+
 :deep(.el-icon) {
-  font-size: 25px !important;
+  font-size: 18px !important;
 }
 </style>

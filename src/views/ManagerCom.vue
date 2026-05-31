@@ -137,18 +137,34 @@ switch(type){
 getData()
 </script>
 <style scoped lang="less">
-.el-card{
-    margin-top: 20px;
-}
-.el-rable{
-    margin-top: 20px;
-}
-.aratar{
-    display: flex;
-    align-items: center;
-    .el-avatar{
-    margin-right: 15px;
-}
+.manegercom {
+  padding: 12px;
 }
 
+.el-card {
+  margin-top: 0;
+  padding: 16px;
+}
+
+.el-table {
+  margin-top: 20px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+
+  .el-avatar {
+    flex-shrink: 0;
+  }
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  padding-top: 16px;
+}
 </style>

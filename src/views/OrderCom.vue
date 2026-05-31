@@ -202,23 +202,51 @@ getOrderList()
 </script>
 
 <style scoped lang="less">
-.search-bar { margin: 15px 0; }
-.batch-btn-group { margin-bottom: 15px; }
+.order-page {
+  padding: 12px;
+}
+
+.search-bar {
+  margin: 15px 0;
+}
+
+.batch-btn-group {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 10px;
+}
+
 :deep(.el-table) {
   max-height: 520px;
   overflow: auto;
+  border-radius: 6px;
 }
 
 .order-info {
-  .order-no { color: #409eff; font-weight: 500; }
-  .order-time { font-size: 12px; color: #909399; margin: 4px 0; }
-  .goods-info { display: flex; align-items: center; margin-top: 8px; }
+  .order-no {
+    color: #409eff;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .order-time {
+    font-size: 12px;
+    color: #909399;
+    margin: 4px 0;
+  }
+
+  .goods-info {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    gap: 12px;
+  }
 }
 
 .page-area {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 10px;
+  padding: 16px 0 10px 0;
 }
 </style>

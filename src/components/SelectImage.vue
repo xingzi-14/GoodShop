@@ -114,47 +114,72 @@ const removeImage = (index) => {
 </script>
 
 <style scoped lang="less">
-.selectimage{
-    .addbut{
+.selectimage {
+  .addbut {
     width: 150px;
     height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px dashed black;
-    cursor: pointer; 
+    border: 2px dashed #c0c4cc;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #c0c4cc;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: #409eff;
+      color: #409eff;
+      background: #ecf5ff;
     }
-    article{
-        width: 90%;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
+  }
+
+  article {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .pic_container {
+    width: 150px;
+    height: 100px;
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .plusicon {
+    width: 100%;
+    height: 100%;
+  }
+
+  span {
+    z-index: 100;
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    width: 22px;
+    height: 22px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: #f56c6c;
     }
-    .pic_container{
-        width: 150px;
-        height: 100px;
-        position: relative;
-    }
-    .plusicon{
-        width: 100%;
-        height: 100%;
-    }
-    span{
-        z-index: 100;
-        position: absolute;
-        right: 10px;
-        top:10px;
-        padding: 6px;
-        border-radius: 50%;
-        border: 2px solid white;
-        color: greenyellow;
-        background-color: rgba(0, 0, 0,0);
-        font-weight: 800;
-    }
-    .imagecard{
-        height: 490px;
-        padding-top: 20px  !important;
-        padding-bottom: 20px !important;
-    }
+  }
+
+  .imagecard {
+    height: 490px;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+  }
 }
 </style>

@@ -87,26 +87,35 @@ onBeforeUnmount(()=>{
   </script>
 
 <style scoped lang="less">
-.echart{
+.echart {
   width: 100%;
-  margin-top: 2cqmin;
-  .t_title{
-    font-size: 14px;
-    font-weight: normal;
+  margin-top: 10px;
+
+  .t_title {
+    font-size: 15px;
+    font-weight: 600;
     display: flex;
-    line-height: 30px;
-    border-bottom: 1px solid #dbdbdb;
+    align-items: center;
+    line-height: 36px;
+    border-bottom: 1px solid #ebeef5;
+    padding-bottom: 10px;
+    color: #303133;
   }
 
-  span{
+  span {
     margin-left: auto;
-    .el-check-tag{
+
+    .el-check-tag {
       margin-left: 10px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
     }
   }
 }
-.t_main{
+
+.t_main {
   width: 100%;
   height: 330px;
+  margin-top: 10px;
 }
 </style>

@@ -197,68 +197,92 @@
     </script>
     
     <style scoped lang="less">
-    .main{
-        height: 100%;
+.main {
+  height: 100%;
+  width: 100%;
+}
+
+.el-main {
+  height: 100%;
+  position: relative;
+
+  .piclistmain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 50px;
+    right: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 15px;
+    box-sizing: border-box;
+
+    .el-card {
+      margin-bottom: 15px;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12) !important;
+      }
+
+      :deep(.el-card__body) {
+        padding: 0 !important;
+      }
+
+      .el-image {
+        height: 150px;
         width: 100%;
-    }
-    .el-main{
-        height: 100%;
-        position: relative;
-    
-        .piclistmain{
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 50px;
-            right: 0;
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding: 15px;
-            box-sizing: border-box;
-            .el-card{
-                margin-bottom: 15px;
-                position: relative;
-                :deep(.el-card__body){
-                    padding: 0 !important;
-                }
-                .el-image{
-                    height: 150px;
-                    width: 100%;
-                }
-                p{
-                    text-align: center;
-                    width: 100%;
-                    height: 30px;
-                    line-height: 30px;
-                    background-color: rgba(0, 0, 0, 0.7);
-                    color: white;
-                    position: absolute;
-                    bottom: 30px;
-                    left: 0;
-                    overflow: hidden;
-                }
-                .pic_edit{
-                    text-align: center;
-                    height: 30px;
-                    line-height: 30px;
-                    padding-bottom: 5px;
-                    span{
-                        padding-right: 15px;
-                        color: #409eff;
-                        cursor: pointer;
-                    }
-                }
-            }
+      }
+
+      p {
+        text-align: center;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        background-color: rgba(0, 0, 0, 0.65);
+        color: #fff;
+        position: absolute;
+        bottom: 30px;
+        left: 0;
+        overflow: hidden;
+        font-size: 13px;
+      }
+
+      .pic_edit {
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+        padding-bottom: 5px;
+        background: #fafbfc;
+
+        span {
+          padding: 0 12px;
+          color: #409eff;
+          cursor: pointer;
+          font-size: 13px;
+          transition: all 0.3s;
+
+          &:hover {
+            color: #66b1ff;
+          }
         }
-        .page{
-            position: absolute;
-            right: 0;
-            left: 0;
-            bottom: 0;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      }
     }
-    </style>
+  }
+
+  .page {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+</style>

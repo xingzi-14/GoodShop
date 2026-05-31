@@ -130,18 +130,26 @@ const handleSelectionChange = (val) => {
 getSkusList()
 </script>
 <style scoped lang="less">
-    .el-card{
-        margin-top: 20px;
-        height: 680px;
-        overflow-y: auto;
-        overflow-x: hidden; 
-        .el-table{
-            margin-top: 15px;
-        }
-    }
-    .pageArea{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.homeIndex {
+  padding: 12px;
+}
+
+.el-card {
+  margin-top: 0;
+  height: 680px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px;
+
+  .el-table {
+    margin-top: 15px;
+  }
+}
+
+.pageArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 16px;
 }
 </style>

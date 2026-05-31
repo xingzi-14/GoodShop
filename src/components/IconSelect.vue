@@ -28,13 +28,14 @@ const ChangeIconFn=(val)=>{
 }
 </script>
 <style scoped lang="less">
-.iconselect{
+.iconselect {
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  .el-select {
     width: 100%;
-    display: flex;
-    align-items: center;
-    .el-select{
-        width: 200px;
-        margin-right: 8px;
-    }
+    max-width: 200px;
+  }
 }
 </style>

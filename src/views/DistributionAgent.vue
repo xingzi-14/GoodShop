@@ -177,36 +177,47 @@ function showPromotionDetail(row) {
 
 <style scoped>
 .agent-list {
-  padding: 20px;
+  padding: 12px;
 }
+
 .search-card {
   margin-bottom: 16px;
 }
+
 .table-card {
   height: 65vh;
   overflow-y: auto;
 }
+
 .search-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
+
 .search-left {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 .user-info {
   line-height: 1.6;
 }
+
 .user-name {
   font-size: 14px;
-  color: #333;
+  color: #303133;
+  font-weight: 500;
 }
+
 .user-phone {
   font-size: 12px;
-  color: #999;
+  color: #909399;
 }
+
 .pagination-wrapper {
   display: flex;
   justify-content: center;

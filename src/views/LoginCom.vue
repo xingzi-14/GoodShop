@@ -122,37 +122,155 @@ const LoginFon = (el) => {
     
 </template>
 <style scoped>
-
 .All {
   width: 100%;
   height: 100%;
+  position: relative;
+  overflow: hidden;
+}
 
+.All::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -30%;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(64, 158, 255, 0.08), rgba(103, 194, 58, 0.05));
+  animation: float 8s ease-in-out infinite;
+  pointer-events: none;
 }
-.row{
+
+.All::after {
+  content: '';
+  position: absolute;
+  bottom: -40%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(230, 162, 60, 0.06), rgba(64, 158, 255, 0.06));
+  animation: float 6s ease-in-out infinite reverse;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.05); }
+}
+
+.row {
   height: 100%;
+  position: relative;
+  z-index: 1;
 }
+
 .leftAll {
-  width:60%;
+  width: 60%;
   height: 100vh;
-  background-color: #e0f0ff;
- display: flex;
+  background: linear-gradient(135deg, #1a73e8 0%, #4a90d9 25%, #2b5bb5 50%, #1a3a6e 100%);
+  display: flex;
   justify-content: center;
   align-items: center;
- flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
-.rightAll{
-    width:40%;
+
+.leftAll::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.leftAll::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+}
+
+.leftAll h1 {
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 1;
+}
+
+.leftAll p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 15px;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.rightAll {
+  width: 40%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
- flex-direction: column;
-  
+  flex-direction: column;
+  background-color: #ffffff;
+  position: relative;
 }
-.p{
-  margin-bottom: 15px;
+
+.p {
+  margin-bottom: 24px;
+  font-size: 26px;
+  font-weight: 600;
+  color: #303133;
+  letter-spacing: 1px;
 }
+
 .login-box {
   text-align: center;
+  padding: 48px 40px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.login-box :deep(.el-input__wrapper) {
+  box-shadow: 0 0 0 1px #e4e7ed inset;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.login-box :deep(.el-input__wrapper:hover) {
+  box-shadow: 0 0 0 1px #c0c4cc inset;
+}
+
+.login-box :deep(.el-input__wrapper.is-focus) {
+  box-shadow: 0 0 0 1px #409eff inset, 0 0 0 3px rgba(64, 158, 255, 0.15);
+}
+
+.login-box :deep(.el-button--primary) {
+  border-radius: 8px;
+  font-size: 16px;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, #409eff, #337ecc);
+  transition: all 0.3s ease;
+}
+
+.login-box :deep(.el-button--primary:hover) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(64, 158, 255, 0.35);
 }
 </style>

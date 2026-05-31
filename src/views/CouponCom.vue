@@ -127,32 +127,40 @@ const editStatus=async(row)=>{
 getCouponList()
 </script>
 <style scoped lang="less">
-.coupon-name-box {
+.coupon {
   padding: 12px;
-  background-color: #f5f7fa;
-  border: 1px solid #ebeef5;
-  border-radius: 4px;
+}
 
+.coupon-name-box {
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #f5f7fa, #e8edf2);
+  border: 1px solid #e4e7ed;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #b3d8ff;
+    box-shadow: 0 2px 8px rgba(64, 158, 255, 0.1);
+  }
 
   .coupon-name {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
     color: #303133;
   }
 
   .coupon-time {
     margin-top: 8px;
-    font-size: 10px;
+    font-size: 11px;
     color: #909399;
     line-height: 1.5;
   }
 }
-.pageArea{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.table{
-    overflow: hidden;
+
+.pageArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 16px;
 }
 </style>

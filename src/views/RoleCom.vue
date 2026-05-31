@@ -124,13 +124,15 @@ const editStatus=async(row)=>{
 }
 </script>
 <style scoped lang="less">
-.rolecom{
-    width: 100%;
-
+.rolecom {
+  width: 100%;
+  padding: 12px;
 }
-.pageArea{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.pageArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 16px;
 }
 </style>

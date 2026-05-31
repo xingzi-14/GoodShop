@@ -122,25 +122,27 @@ const handleUploadSuccess = () => {
 };
 </script>
 <style scoped lang="less">
-.piclist{
-    width: 100%;
-    height: 100%;
-    .el_card{
-    margin-top: 20px;
-    padding-top: 0px !important;
-    
-        .p_title{
-            border-bottom: 1px solid #dbdbdb;
-            display: flex;
-            align-items: center;
-        }
-    :deep(.el_card__body){
-        padding-top: 0px !important;
-        height: 100%;
-    }
+.piclist {
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+
+  .el-card {
+    margin-top: 0;
+    padding-top: 0 !important;
+
+    .p_title {
+      border-bottom: 1px solid #ebeef5;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 0;
     }
 
-
+    :deep(.el-card__body) {
+      padding-top: 0 !important;
+      height: 100%;
+    }
+  }
 }
-
 </style>

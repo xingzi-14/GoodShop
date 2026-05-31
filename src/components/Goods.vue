@@ -69,16 +69,35 @@ onMounted(() => {
 .item-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px; /* 间距 */
+  gap: 16px;
 }
+
+.item-group .el-card {
+  text-align: center;
+  font-size: 13px;
+  color: #606266;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.item-group .el-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  border-color: #b3d8ff;
+}
+
 .card-container {
   display: flex;
-  flex-direction: column; /* 关键：竖着排 */
-  gap: 20px; /* 上下间距 */
+  flex-direction: column;
+  gap: 16px;
 }
-/* 小卡片宽度 */
-/* .item-card {
-  width: 100px;
-  text-align: center;
-} */
+
+.card-container > .card-row > .el-card {
+  border-radius: 10px;
+}
+
+.card-container .header-right {
+  font-weight: 600;
+  font-size: 15px;
+}
 </style>

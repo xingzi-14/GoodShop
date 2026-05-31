@@ -71,21 +71,43 @@
   
 
 <style scoped lang="less">
-.homeindexnav{
+.homeindexnav {
   margin-top: 20px;
+  padding: 0 10px;
 }
 
-.el-card{
+.el-card {
   display: flex;
   justify-content: center;
+  align-items: center;
   font-size: 12px;
   cursor: pointer;
   text-align: center;
-  .el-icon{
-    font-size: 22px;
+  border-radius: 10px;
+  padding: 16px 8px;
+  transition: all 0.3s ease;
+  min-height: 90px;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .el-icon {
+    font-size: 26px;
     padding-bottom: 10px;
+    color: #409eff;
+    transition: all 0.3s ease;
+  }
+
+  &:hover .el-icon {
+    transform: scale(1.15);
+  }
+
+  span {
+    font-size: 13px;
+    font-weight: 500;
+    color: #303133;
   }
 }
-
-  
-  </style>
+</style>

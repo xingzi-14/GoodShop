@@ -97,32 +97,47 @@ const handleClose = () => {
 .detail-wrap {
   padding: 10px 0;
 }
+
 .block {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: #fafbfc;
+  border-radius: 8px;
+  border: 1px solid #ebeef5;
+
   &:not(:last-child) {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 20px;
+    margin-bottom: 16px;
   }
+
   .block-title {
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 12px;
-    color: #333;
+    color: #303133;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e4e7ed;
   }
+
   .info-item {
     display: flex;
     align-items: center;
     margin-bottom: 8px;
+    font-size: 14px;
+
     .label {
       width: 90px;
-      color: #666;
+      color: #909399;
+      flex-shrink: 0;
     }
+
     .value {
-      color: #333;
+      color: #303133;
     }
+
     .tag-group {
       display: flex;
       gap: 6px;
+      flex-wrap: wrap;
     }
   }
 }

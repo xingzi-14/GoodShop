@@ -30,33 +30,47 @@ const{
 }=initSkuFn()
 </script>
 <style lang="less" scoped>
-.sku_main{
-    width: 100%;
-    height:auto;
-    border: 1px solid #dbdbdb;
-    margin-bottom: 20px;
-        .sku_top{
-            width: 100%;
-            height: 45px;
-            line-height: 45px;
-            border-bottom: #dbdbdb 1px solid;
-            .span{
-              float: right;
-              margin-right: 20px;
-            }
-            :deep(.el-input){
-                height: 24px !important;
-                font-size: 12px;
-            }
-        }
-        .sku_bottom{
-            padding: 10px;
-        }
-        .inputStyle{
-            width: 150px;
-            margin-top: 8px;
-            margin-left: 10px;
-        }
-}
+.sku_main {
+  width: 100%;
+  height: auto;
+  border: 1px solid #e4e7ed;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background: #fff;
+  transition: all 0.3s ease;
 
+  &:hover {
+    border-color: #b3d8ff;
+    box-shadow: 0 2px 10px rgba(64, 158, 255, 0.08);
+  }
+
+  .sku_top {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid #ebeef5;
+    background: #fafbfc;
+
+    .span {
+      float: right;
+      margin-right: 20px;
+    }
+
+    :deep(.el-input) {
+      height: 24px !important;
+      font-size: 12px;
+    }
+  }
+
+  .sku_bottom {
+    padding: 12px 10px;
+  }
+
+  .inputStyle {
+    width: 150px;
+    margin-top: 8px;
+    margin-left: 10px;
+  }
+}
 </style>

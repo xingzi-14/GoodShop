@@ -147,37 +147,52 @@ const sendRowData=(row)=>{
 getGoodsList();
 </script>
 <style scoped lang="less">
-.goodslist{
-    width: 100%;
-    height: 100%;
-    .el-card{
-        margin-top: 20px;
-        .goodinfo{
-            width: 100%;
-            .el-avatar{
-                margin-right: 10px;
-                float: left;
-            }
-            h1{
-                font-size: 14px;
-                margin: 0;
-                padding: 0;
-            }
-            span{
-                color: red;
-                display:block;
-                font-size: 12px;
-            }
-            strong{
-                font-size: 12px;
-                font-weight: normal;
-            }
-        }
+.goodslist {
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+
+  .el-card {
+    margin-top: 0;
+    padding: 16px;
+
+    .goodinfo {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .el-avatar {
+        flex-shrink: 0;
+      }
+
+      h1 {
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        font-weight: 500;
+        color: #303133;
+      }
+
+      span {
+        color: #f56c6c;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      strong {
+        font-size: 12px;
+        font-weight: normal;
+        color: #909399;
+      }
     }
+  }
 }
-.pageArea{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.pageArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 16px;
 }
 </style>

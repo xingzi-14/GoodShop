@@ -135,7 +135,9 @@ onBeforeUnmount(() => {
 
 <style scoped lang="less">
 .wang_editor_com {
-    width: 100%;
-    border: 1px solid #ccc;
+  width: 100%;
+  border: 1px solid #e4e7ed;
+  border-radius: 6px;
+  overflow: hidden;
 }
 </style>

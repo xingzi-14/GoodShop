@@ -47,19 +47,45 @@
 
 </script>
 <style scoped lang="less">
-table{
-    border: 1px solid #dbdbdb;
-    width: 100%;
-    thead tr th {
-        border: 1px solid #dbdbdb;
+table {
+  border: 1px solid #e4e7ed;
+  border-radius: 6px;
+  overflow: hidden;
+  width: 100%;
+  border-collapse: collapse;
+
+  thead tr th {
+    border: 1px solid #e4e7ed;
+    background: #f5f7fa;
+    padding: 8px 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #606266;
+  }
+
+  tbody tr td {
+    border: 1px solid #ebeef5;
+    text-align: center;
+    padding: 4px;
+
+    input {
+      width: 100%;
+      height: 28px;
+      border: 1px solid #e4e7ed;
+      border-radius: 4px;
+      padding: 0 6px;
+      font-size: 13px;
+      transition: border-color 0.3s;
+
+      &:focus {
+        outline: none;
+        border-color: #409eff;
+      }
     }
-    tbody tr td{
-        border: 1px solid #dbdbdb;
-       text-align: center;
-        input{
-            width: 100%;
-            height: 20px;
-        }
-    }
+  }
+
+  tbody tr:hover td {
+    background: #fafbfc;
+  }
 }
 </style>
