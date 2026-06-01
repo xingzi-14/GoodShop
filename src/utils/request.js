@@ -6,7 +6,7 @@ const instance =axios.create({
     //设置服务器地址
     baseURL : '/api',
 //设置请求超时时间为5秒
-    timeout:40000
+    timeout:400000
 })
 
 //设置请求拦截器,将header属性携带拼接到此处

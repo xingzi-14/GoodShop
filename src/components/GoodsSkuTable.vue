@@ -3,24 +3,15 @@
         <table cellpading="0" cellspacing="0">
             <thead>
                 <tr>
-                    <th colspan="2">商品规格</th>
-                    <th rowspan="2">市场价</th>
-                    <th rowspan="2">销售价</th>
-                    <th rowspan="2">成本价</th>
-                    <th rowspan="2">库存</th>
-                    <th rowspan="2">商品体积</th>
-                    <th rowspan="2">商品重量</th>
-                    <th rowspan="2">编码</th>
+                    <th v-for="(item,index) in tableTitle" :key="index" :colspan="item.col" :rowspan="item.row">{{ item.name }}</th>
                 </tr>
                 <tr>
-                    <th width="80">尺寸</th>
-                    <th width="80">颜色</th>
+                    <th v-for="(item,index) in isSkuVal" :key="index" width="60">{{ item.name }}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>L</td>
-                    <td>绿色</td>
+                <tr v-for="item in skuTable" :key="item.id">
+                    <td v-for="val in  item.skus" :key="val.id" >{{ val.value }}</td>
                     <td>
                         <input type="number" />
                     </td>
@@ -44,7 +35,10 @@
    </el-form-item>
 </template>
 <script setup>
-
+import { initTableData } from '../utils/useSku';
+const{
+isSkuVal,tableTitle,skuTable
+}=initTableData()
 </script>
 <style scoped lang="less">
 table {

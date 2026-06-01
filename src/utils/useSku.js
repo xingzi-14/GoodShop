@@ -3,9 +3,11 @@ import { insertGoodsSkusCardValueFn, delGoodsSkusCardValueFn,
      editGoodsSkusCardValueFn ,insertGoodsSkusFn,
      delGoodsSkusCardFn,editGoodsSkusCardFn} from "../api/goods";
 import { ElMessage } from 'element-plus';
+import { computed } from "vue";
 
 export const goodID = ref(0);
 export const skuList = ref([]);
+export const skuTable=ref([]);
 
 /**
  * 初始化 SKU 列表数据
@@ -30,6 +32,7 @@ export function initSkuListFn(goodinfo) {
         }
         return item;
     });
+    skuTable.value=goodinfo.goodsSkus;
 }
 
 /**
@@ -222,5 +225,29 @@ export function initSkuFn(){
     }
     return{
         AddTag,DelSku,Editsku
+    }
+}
+export function initTableData(){
+    const isSkuVal=computed(()=>{
+        return skuList.value.filter((item)=>item.goodsSkusCardValue.length!=0)
+    })
+    let tableTitle=computed(()=>{
+        let tablen=isSkuVal.value.length;
+        let titleArr=[
+                        {name:'商品规格',col:tablen,row:tablen>0?1:2},
+                        {name:'市场价',row:2},
+                        {name:'销售价',row:2},
+                        {name:'成本价',row:2},
+                        {name:'库存',row:2},
+                        {name:'商品体积',row:2},
+                        {name:'商品重量',row:2},
+                        {name:'编码',row:2},
+        ];
+        return titleArr;
+    })
+    return{
+        isSkuVal,
+        tableTitle,
+        skuTable,
     }
 }
