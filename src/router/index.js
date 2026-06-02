@@ -5,12 +5,7 @@ const routes = [
         path: '/',
         redirect: '/login'
       },
-  {
-    path: '/login',
-    name: 'LoginCom',
-    component: () => import('../views/LoginCom.vue')
-  },
-  {
+    {
     path: '/admin',
     name: 'AdminIndex',
     component: () => import('../views/AdminIndex.vue'),

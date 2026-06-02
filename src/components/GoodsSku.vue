@@ -56,7 +56,7 @@ import { getCategoryGoodsFn,editGoodsSkuFn } from '../api/goods';
 import { ElMessage } from 'element-plus';
 import GoodsSkuAdd from './GoodsSkuAdd.vue';
 import GoodsSkuTable from './GoodsSkuTable.vue';
-import { goodID, initSkuListFn } from '../utils/useSku.js';
+import { goodID, initSkuListFn, skuTable } from '../utils/useSku.js';
 let isDialog = ref(false);
 const SkuFormModel = reactive({
     sku_type: 0,
@@ -114,7 +114,14 @@ const CloseDialog = () => {
     emits('update:propID', 0);
 };
 const editskusdataFn=async()=>{
-    let result = await editGoodsSkuFn(props.propID, SkuFormModel);
+    let data={
+        stu_type:SkuFormModel.sku_type,
+        sku_value:SkuFormModel.sku_value,S
+    };
+    if(SkuFormModel.sku_type==1){
+        data.goodSkus= skuTable.value;
+    }
+    let result = await editGoodsSkuFn(props.propID, data);
     if (result.msg != 'ok') return ElMessage.error(result.msg);
     ElMessage.success('保存成功');
     CloseDialog();

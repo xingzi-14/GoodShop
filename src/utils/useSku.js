@@ -100,6 +100,7 @@ export function initSkuItemVal(id) {
             console.error('添加规格值失败:', error);
             ElMessage.error('添加失败，请稍后重试');
         }
+        getTableDataFn()
     };
     
     /**
@@ -131,6 +132,7 @@ export function initSkuItemVal(id) {
             console.error('删除规格值失败:', error);
             ElMessage.error('删除失败，请稍后重试');
         }
+        getTableDataFn()
     };
     
     /**
@@ -158,7 +160,7 @@ export function initSkuItemVal(id) {
             
             // 更新本地列表
             tag.value = val;
-            tag.text = val;
+            getTableDataFn();
             
     };
     
@@ -226,6 +228,64 @@ export function initSkuFn(){
     return{
         AddTag,DelSku,Editsku
     }
+}
+function getTableDataFn(){
+    setTimeout(()=>{ 
+        if(skuList.length==0)return skuTable.value=[];
+        let list=[];
+        skuList.value.forEach((item)=>{ 
+            if(item.goodsSkusCardValue&&item.goodsSkusCardValue.length>0){
+                list.push(item.goodsSkusCardValue)
+            }
+        })
+        if(list.length==0)return skuTable.value=[];
+        let arr=TagSort(...list);
+        let newSkuTable=JSON.parse(JSON.stringify(skuTable.value)).map(item=>{
+            if(!Array.isArray(item.skus)){
+                item.skus=Object.keys(item.skus).map(val=>{
+                    return item.skus[val];
+                });
+            }
+                item.skusId=item.skus.sort((num1,num2)=>num1.id-num2.id).map(val=>val.id).join(",")
+            return item;
+        })
+        skuTable.value=arr.map(item=>{
+            let result =skuCompare(JSON.parse(JSON.stringify(item)),newSkuTable)
+            return {
+               skus: item,
+                // image: result.image||" ",
+                pprice: result?.pprice||"0.00",
+                oprice:result?.oprice|| "0.00",
+                cprice: result?.cprice||"0.00",
+                stock:result?.stock|| 0,
+                volume: result?.volume||0,
+                weight:result?.weight|| 0,
+                code: result?.code||"",
+                goods_id: goodID.value,
+            }
+        })
+    },500)
+}
+function TagSort(){
+    return Array.prototype.reduce.call(arguments,function(prev,next){
+        let arr=[];
+        prev.forEach(function(prev){
+            next.forEach(function(next){
+                arr.push(prev.concat(next));
+            })
+        })
+        return arr;
+    },[[]])
+}
+function skuCompare(item,newSkuTable){
+let itemId=item.skus.sort((num1,num2)=>num1.id-num2.id).map(val=>val.id).join(",")
+return newSkuTable.find(k=>{
+    if(item.length>k.skus.length){
+        return itemId.indexOf(k.skusId)!=-1;
+    }else{
+        return k.skusId.indexOf(itemId)!=-1;
+    }
+});
 }
 export function initTableData(){
     const isSkuVal=computed(()=>{

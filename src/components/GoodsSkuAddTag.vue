@@ -3,7 +3,7 @@
         <el-tag closable :disable-transitions="false" v-for="(tag,index) in tagList.goodsSkusCardValue" :key="index" @close="deleteTag(tag)">
             <el-input class="inputStyle" v-model="tag.text" @change="editTag($event,tag)"></el-input>
         </el-tag> 
-        <el-input v-if="inputVisable" class="inputStyle" size="small" v-model="inputVal" ref="inputRef" @blur="InputBlur()" @keyup.enter="InputBlur()"></el-input>
+        <el-input v-if="inputVisable" class="inputStyle" size="small" v-model="inputVal" ref="inputRef"  @keyup.enter="InputBlur()"></el-input>
         <el-button v-else size="small" @click="showInput">+New Tag</el-button>
     </div>
 </template>

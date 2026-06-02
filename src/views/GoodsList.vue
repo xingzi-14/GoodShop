@@ -130,7 +130,7 @@ const getGoodsCategory=async()=>{
     if(res.msg!='ok'||!res.data)return ElMessage.error(res.msg);
     categoryData.value=res.data.filter(item=>item.status==1);
 }
-getGoodsCategory();
+// getGoodsCategory();
 const handleSizeChange = (val) => {
     queryData.limit = val; // 更新每页条数
     page.value = 1;        // 切换条数后重置到第一页
