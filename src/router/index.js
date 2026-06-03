@@ -90,6 +90,12 @@ const routes = [
         component :()=>import("@/views/CommentCom.vue")
       },
       {
+        path:"notice/list",
+        meta :{title:'新闻公告管理'},
+        name:'NewsList',
+        component :()=>import("@/views/NewsList.vue")
+      },
+      {
         path:"distribution/index",
         meta :{title:'分销员管理'},
         name:'DistributionAgent',

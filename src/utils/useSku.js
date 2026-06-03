@@ -202,6 +202,8 @@ export function initSkuFn(){
              text:res.data.name,
              goodsSkusCardValue:[],
         })
+            getTableDataFn();
+
     }
     const DelSku=async(id)=>{
         let res=await delGoodsSkusCardFn(id)
@@ -209,6 +211,8 @@ export function initSkuFn(){
         ElMessage.success(res.msg)
         let index=skuList.value.findIndex(item=>item.id==id)
         if(index!=-1)skuList.value.splice(index,1)
+            getTableDataFn();
+
     }
     const Editsku=async(val)=>{ 
         let obj={
@@ -224,6 +228,8 @@ export function initSkuFn(){
         }
         val.name=val.text
         ElMessage.success(res.msg)
+            getTableDataFn();
+
     }
     return{
         AddTag,DelSku,Editsku
@@ -253,7 +259,6 @@ function getTableDataFn(){
             let result =skuCompare(JSON.parse(JSON.stringify(item)),newSkuTable)
             return {
                skus: item,
-                // image: result.image||" ",
                 pprice: result?.pprice||"0.00",
                 oprice:result?.oprice|| "0.00",
                 cprice: result?.cprice||"0.00",

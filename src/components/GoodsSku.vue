@@ -115,11 +115,11 @@ const CloseDialog = () => {
 };
 const editskusdataFn=async()=>{
     let data={
-        stu_type:SkuFormModel.sku_type,
-        sku_value:SkuFormModel.sku_value,S
+        sku_type:SkuFormModel.sku_type,
+        sku_value:SkuFormModel.sku_value,
     };
     if(SkuFormModel.sku_type==1){
-        data.goodSkus= skuTable.value;
+        data.goodsSkus= skuTable.value;
     }
     let result = await editGoodsSkuFn(props.propID, data);
     if (result.msg != 'ok') return ElMessage.error(result.msg);

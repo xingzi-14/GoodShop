@@ -25,12 +25,13 @@
     
                 <el-col :span="10">
                     <el-button size="small" plain type="primary" @click="dia_title='新增商品'">新增商品</el-button>
-                    <el-button size="small" plain type="danger">批量删除</el-button>
-                    <el-button size="small" plain >上架</el-button>
-                    <el-button size="small" plain >下架</el-button>
+                    <el-button size="small" plain type="danger" @click="handleBatchDelete">批量删除</el-button>
+                    <el-button size="small" plain @click="handleBatchOn">上架</el-button>
+                    <el-button size="small" plain @click="handleBatchOff">下架</el-button>
                 </el-col>
             </el-row>
-            <el-table :data="tableData" style="width: 100%; margin-bottom: 20px; margin-top: 15px; height: 600px;" >
+            <el-table :data="tableData" style="width: 100%; margin-bottom: 20px; margin-top: 15px; height: 600px;" @selection-change="handleSelectionChange">
+                <el-table-column type="selection" width="45" />
                 <el-table-column label="商品信息">
                     <template #default="scoped">
                         <div class="goodinfo">
@@ -93,8 +94,8 @@
 </template>
 <script setup>
 import { reactive, ref } from 'vue';
-import { getGoodsListFn,getGoodsCategoryFn } from '../api/goods';
-import { ElMessage } from 'element-plus';
+import { getGoodsListFn,getGoodsCategoryFn,delGoodsAllFn,setGoodsStatusFn } from '../api/goods';
+import { ElMessage,ElMessageBox } from 'element-plus';
 import UpdateGood from '../components/UpdateGood.vue';
 import GoodBanner from '../components/GoodBanner.vue';
 import GoodInfo from '../components/GoodInfo.vue';
@@ -116,6 +117,54 @@ let infoID=ref(0)   //商品详情id
 let goodBannerRef=ref(null)
 let goodinfoRef=ref(null)
 let skuID=ref(null)
+let selectRows=ref([])
+
+// 表格多选变化
+const handleSelectionChange = (rows) => {
+    selectRows.value = rows
+}
+
+// 获取选中行的 id 数组
+const getSelectedIds = () => selectRows.value.map(row => row.id)
+
+// 批量删除
+const handleBatchDelete = async () => {
+    const ids = getSelectedIds()
+    if (ids.length === 0) return ElMessage.warning('请先选择商品')
+    try {
+        await ElMessageBox.confirm(`确定删除选中的 ${ids.length} 件商品？`, '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+        })
+        const res = await delGoodsAllFn(ids)
+        if (res.msg !== 'ok') return ElMessage.error('批量删除失败：' + res.msg)
+        ElMessage.success('批量删除成功')
+        getGoodsList()
+    } catch {
+        ElMessage.info('已取消')
+    }
+}
+
+// 批量上架
+const handleBatchOn = async () => {
+    const ids = getSelectedIds()
+    if (ids.length === 0) return ElMessage.warning('请先选择商品')
+    const res = await setGoodsStatusFn({ ids, status: 1 })
+    if (res.msg !== 'ok') return ElMessage.error('上架失败：' + res.msg)
+    ElMessage.success('批量上架成功')
+    getGoodsList()
+}
+
+// 批量下架
+const handleBatchOff = async () => {
+    const ids = getSelectedIds()
+    if (ids.length === 0) return ElMessage.warning('请先选择商品')
+    const res = await setGoodsStatusFn({ ids, status: 0 })
+    if (res.msg !== 'ok') return ElMessage.error('下架失败：' + res.msg)
+    ElMessage.success('批量下架成功')
+    getGoodsList()
+}
 
 const getGoodsList=async()=>{
     let res=await getGoodsListFn(page.value,queryData);
