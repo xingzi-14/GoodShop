@@ -4,11 +4,11 @@
       <!-- 1. 订单状态标签页 -->
       <el-tabs v-model="tabMap.tab" @tab-change="getOrderList">
         <el-tab-pane label="全部" name="all" />
-        <el-tab-pane label="待支付" name="wait_pay" />
-        <el-tab-pane label="待发货" name="wait_ship " />
-        <el-tab-pane label="待收货" name="wait_confirm " />
+        <el-tab-pane label="待支付" name="nopay" />
+        <el-tab-pane label="待发货" name="noship " />
+        <el-tab-pane label="待收货" name="shiped " />
         <el-tab-pane label="已收货" name="received" />
-        <el-tab-pane label="已完成" name="finished" />
+        <el-tab-pane label="已完成" name="finish" />
         <el-tab-pane label="已关闭" name="closed" />
         <el-tab-pane label="退款中" name="refunding" />
       </el-tabs>
