@@ -39,19 +39,29 @@
 </template>
 <script setup>
 import { getCategoryListFn ,DeleteCategory,CategoryStatu} from '../api/category';
+import { getGoodsListFn} from '../api/goods';
+
 import { ElMessage ,ElMessageBox} from 'element-plus';
-import { ref } from 'vue';
+import { ref ,reactive} from 'vue';
 import updateCategory from '../components/updateCategory.vue';
 let tableData=ref([])
 let title=ref(null)
 let editSkus=ref({})
+let queryData=reactive({
+    tab:'all',
+    title:'',
+    category_id:null,
+    limit:8,
+});
+let page=ref(1);
+
 const getCategoryList=async()=>{
-    let result=await getCategoryListFn()
+   let result=await getGoodsListFn(page.value,queryData);
     console.log(result);
     if(result.msg!='ok'||!result.data){
         return ElMessage.error(result.msg);
     }
-    tableData.value=result.data;
+    tableData.value=result.data.cates;
 }
 const DelCategory=async(id)=>{
     try {

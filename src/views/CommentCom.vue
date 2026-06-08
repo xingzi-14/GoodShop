@@ -20,10 +20,8 @@
                     <template #default="scoped">
                         <div class="expand-row">
                             <p>
-                                <strong>评价用户：</strong>{{ scoped.row.user.username }}
+                                <strong>商家回复：</strong>{{ scoped.row.extra[0].data }}
                             </p>
-                            <p><strong>评价内容：</strong>{{ scoped.row.review.data }}</p>
-                            <p><strong>评价时间：</strong>{{ scoped.row.review_time }}</p>
                         </div>
                     </template>
                 </el-table-column>
