@@ -6,6 +6,45 @@
     :close-on-click-modal="false"
     @closed="handleClosed"
   >
+    <!-- 分销员信息 -->
+    <div class="agent-summary" v-if="agentInfo">
+      <div class="agent-summary-left">
+        <el-avatar :size="48" :src="agentInfo.avatar">
+          <el-icon><UserFilled /></el-icon>
+        </el-avatar>
+        <div class="agent-summary-info">
+          <div class="agent-summary-name">{{ agentInfo.nickname || agentInfo.username || '--' }}</div>
+          <div class="agent-summary-phone">{{ agentInfo.phone || '--' }}</div>
+        </div>
+      </div>
+      <div class="agent-summary-right">
+        <div class="agent-summary-item">
+          <span class="label">推广数量</span>
+          <span class="value">{{ agentInfo.share_num ?? 0 }}</span>
+        </div>
+        <div class="agent-summary-item">
+          <span class="label">订单数量</span>
+          <span class="value">{{ agentInfo.share_order_num ?? 0 }}</span>
+        </div>
+        <div class="agent-summary-item">
+          <span class="label">订单金额</span>
+          <span class="value">¥{{ agentInfo.order_price ?? '0.00' }}</span>
+        </div>
+        <div class="agent-summary-item">
+          <span class="label">账户佣金</span>
+          <span class="value">¥{{ agentInfo.commission ?? '0.00' }}</span>
+        </div>
+        <div class="agent-summary-item">
+          <span class="label">已提现</span>
+          <span class="value">¥{{ agentInfo.cash_out_price ?? '0.00' }}</span>
+        </div>
+        <div class="agent-summary-item">
+          <span class="label">未提现</span>
+          <span class="value">¥{{ agentInfo.no_cash_out_price ?? '0.00' }}</span>
+        </div>
+      </div>
+    </div>
+
     <!-- 筛选栏 -->
     <div class="filter-bar">
       <el-radio-group v-model="timeType" size="default">
@@ -54,13 +93,36 @@
 
       <el-table-column label="用户信息" min-width="160">
         <template #default="{ row }">
-          {{ row.username || '--' }}
+          <div class="user-info">
+            <div class="user-name">{{ row.nickname || row.username || '--' }}</div>
+            <div class="user-phone">电话：{{ row.phone || '--' }}</div>
+          </div>
         </template>
       </el-table-column>
 
-      <el-table-column prop="promotion_count" label="推广数量" width="120" align="center" />
-      <el-table-column prop="order_count" label="推广订单数量" width="120" align="center" />
-      <el-table-column prop="created_at" label="创建时间" width="180" align="center" />
+      <el-table-column prop="share_num" label="推广数量" width="100" align="center" />
+      <el-table-column prop="share_order_num" label="推广订单数量" width="120" align="center" />
+      <el-table-column prop="order_price" label="订单金额" width="120" align="right">
+        <template #default="{ row }">
+          ¥{{ row.order_price ?? '0.00' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="commission" label="账户佣金" width="120" align="right">
+        <template #default="{ row }">
+          ¥{{ row.commission ?? '0.00' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="cash_out_price" label="已提现佣金" width="120" align="right">
+        <template #default="{ row }">
+          ¥{{ row.cash_out_price ?? '0.00' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="no_cash_out_price" label="未提现佣金" width="120" align="right">
+        <template #default="{ row }">
+          ¥{{ row.no_cash_out_price ?? '0.00' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="create_time" label="创建时间" width="180" align="center" />
     </el-table>
 
     <!-- 分页 -->
@@ -86,6 +148,7 @@ import { getPromotionDetail } from '@/api/distribution'
 // ========== 弹窗控制 ==========
 const visible = ref(false)
 const emptyText = ref('No Data')
+const agentInfo = ref(null)
 
 // ========== 筛选条件 ==========
 const timeType = ref('all')
@@ -102,6 +165,7 @@ const loading = ref(false)
 
 // ========== 暴露给父组件的方法 ==========
 function open(row) {
+  agentInfo.value = row
   currentUserId.value = row.id
   timeType.value = 'all'
   dateRange.value = null
@@ -148,6 +212,7 @@ function handleClosed() {
   tableData.value = []
   totalCount.value = 0
   currentUserId.value = null
+  agentInfo.value = null
 }
 </script>
 
@@ -162,5 +227,78 @@ function handleClosed() {
   background: #fafbfc;
   border-radius: 8px;
   border: 1px solid #ebeef5;
+}
+
+.user-info {
+  line-height: 1.6;
+}
+
+.user-name {
+  font-size: 14px;
+  color: #303133;
+  font-weight: 500;
+}
+
+.user-phone {
+  font-size: 12px;
+  color: #909399;
+}
+
+.agent-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  background: #f0f5ff;
+  border-radius: 8px;
+  border: 1px solid #d6e4ff;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.agent-summary-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.agent-summary-info {
+  line-height: 1.5;
+}
+
+.agent-summary-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #303133;
+}
+
+.agent-summary-phone {
+  font-size: 13px;
+  color: #909399;
+}
+
+.agent-summary-right {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.agent-summary-item {
+  text-align: center;
+}
+
+.agent-summary-item .label {
+  display: block;
+  font-size: 12px;
+  color: #909399;
+  margin-bottom: 2px;
+}
+
+.agent-summary-item .value {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #303133;
 }
 </style>

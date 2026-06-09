@@ -171,6 +171,7 @@ function handleCurrentChange() {
 }
 
 function showPromotionDetail(row) {
+  console.log( row)
   detailRef.value?.open(row)
 }
 </script>
