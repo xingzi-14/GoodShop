@@ -20,8 +20,9 @@
                     <template #default="scoped">
                         <div class="expand-row">
                             <p>
-                                <strong>商家回复：</strong>{{ scoped.row.extra[0].data }}
+                                <strong>商家回复：</strong>{{ scoped.row.extra?.[0]?.data || "暂无回复"}}
                             </p>
+                            <el-button type="primary" @click="editComment(scoped.row)">修改回复</el-button>
                         </div>
                     </template>
                 </el-table-column>
@@ -60,6 +61,7 @@
                         @change="editStatus(scoped.row)"/>
                     </template>
                 </el-table-column>
+                
              </el-table>
              </div>
              <div class="page">
@@ -71,18 +73,35 @@
           @change="handleCurrentChange"
         /></div>
         </el-card>
+        <el-dialog title="修改回复" v-model="dialogVisible">
+            <el-form>
+                <el-form-item label="回复内容">
+                <el-input v-model="form.data" />
+                </el-form-item>
+            </el-form>
+            <template #footer>
+                <el-button type="primary" @click="updateComment">确定</el-button>
+                <el-button @click="dialogVisible = false">取消</el-button>
+            </template>
+        </el-dialog>
     </div>
 
     </template>
 <script setup>
-import { ref } from 'vue';
-import { getCommentListFn,updateCommentStatu} from '../api/comment';
+import { reactive, ref } from 'vue';
+import { getCommentListFn,updateCommentStatu,reviewCommentFn} from '../api/comment';
 import { ElMessage } from 'element-plus';
 let title=ref('')
 let tableData=ref([])
 let page=ref(1)
 let pageSize=ref(10)
 let total=ref(0)
+let dialogVisible=ref(false)
+const form=reactive({
+    id:'',
+    data:'',
+})
+
 const getCommentList=async()=>{
     let result=await getCommentListFn(page.value,title.value)
     console.log(result);
@@ -103,6 +122,19 @@ const editStatus=async(row)=>{
 const handleCurrentChange=(p)=>{
     page.value=p;
     getCommentList();
+}
+const editComment=async(row)=>{
+    dialogVisible.value=true;
+    form.id=row.id;
+    form.data = row.extra?.[0]?.data || '';
+}
+const updateComment=async()=>{
+    console.log(form.id,form.data);
+   let result = await reviewCommentFn(form.id, { data: form.data })
+    if(result.msg!='ok'||!result.data)return ElMessage.error(result.msg)
+    ElMessage.success('修改成功！')
+    dialogVisible.value=false;
+    getCommentList()
 }
 getCommentList()
 </script>
